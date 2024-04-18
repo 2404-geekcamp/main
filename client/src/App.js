@@ -1,30 +1,32 @@
 import React, { useEffect,useState } from 'react';
 import './App.css';
+import axios from 'axios';
 
 const App = () => {
- const url = "/users";
- const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([])
 
- useEffect(() => {
-   fetch(url, { method: "GET" })
-     .then((res) => res.json())
-     .then((data) => {
-       setUsers(data);
-     })
-     .catch((err) => {
-       console.log(err);
-       console.log("err");
-     });
- }, []);
+  useEffect(() => {
+    const fetchData = async() => {
+      const url = "/users";
+      try {
+        const response = await axios.get(url);
+        setUsers(response.data);
+      } catch(error) {
+        console.error('Error fetching data:', error);
+      }
+    }
 
-    return (
-      <div classname="App">
-        <h1>Users</h1>
-        {users.map((user,index) =>
-          <div key={index}>{user.name}</div>
-        )}
-      </div>
-    );
+    fetchData();
+  }, []);
+
+  return (
+    <div classname="App">
+      <h1>Users</h1>
+      {users.map((user,index) =>
+        <div key={index}>{user.name}</div>
+      )}
+    </div>
+  );
 }
 
 export default App;
