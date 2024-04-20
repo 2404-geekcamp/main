@@ -9,10 +9,10 @@ npm i
 ```sh
 cd client
 npm install
+cd ../
 ```
 
 ## 実行
 ```sh
-cd ../
 npm run dev
 ```
