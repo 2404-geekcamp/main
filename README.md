@@ -100,7 +100,6 @@ CREATE TABLE user_skills (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
     skill_id INT NOT NULL,
-    content VARCHAR(255),
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
