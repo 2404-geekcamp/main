@@ -1,4 +1,4 @@
-class UserController {
+export default class UserController {
   /**
    * 対象とするユーザー、検索条件を受け取り、ユーザーのスコアを返す。
    * @param user Object ユーザー情報
