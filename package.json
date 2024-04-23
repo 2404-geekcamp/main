@@ -6,7 +6,8 @@
     "start": "node ./bin/www",
     "server": "nodemon ./bin/www",
     "client": "set PORT=3002 && npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\" "
+    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^1.6.8",
@@ -17,5 +18,18 @@
     "http-errors": "~2.0.0",
     "morgan": "~1.10.0",
     "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.24.4",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "^.+\\.(css|less|scss)$": "identity-obj-proxy"
+    }
   }
 }
