@@ -107,13 +107,13 @@ CREATE TABLE user_skills (
 );
 ```
 
-## config/environment/.envファイルのSUPABASE_PROJECT_URLとSUPABASE_PROJECT_KEYの設定
+## 環境変数の設定
 .env.exampleファイルをコピーして.envファイルを作成<br>
 supabaseのプロジェクトの中のサイドバーのproject settingsのページに飛ぶ<br>
 APIという項目があるのでそのにPorjectURLとProjectAPIkeysのanonpublicの方をそれぞれSUPABASE_PROJECT_URLとSUPABASE_PROJECT_KEYに設定する。
 
 
-## updated_atカラムを更新
+## updated_atカラムにトリガーを設定
 subapaseのSQLEditorで実行
 ```
 create extension if not exists moddatetime schema extensions;
