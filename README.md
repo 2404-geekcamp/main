@@ -196,3 +196,8 @@ CREATE TABLE user_skills (
     FOREIGN KEY (skill_id) REFERENCES skills(id) ON DELETE SET NULL
 );
 ```
+
+## config/environment/.envファイルのSUPABASE_PROJECT_URLとSUPABASE_PROJECT_KEYの設定
+.env.exampleファイルをコピーして.envファイルを作成<br>
+supabaseのプロジェクトの中のサイドバーのproject settingsのページに飛ぶ<br>
+APIという項目があるのでそのにPorjectURLとProjectAPIkeysのanonpublicの方をそれぞれSUPABASE_PROJECT_URLとSUPABASE_PROJECT_KEYに設定する。
