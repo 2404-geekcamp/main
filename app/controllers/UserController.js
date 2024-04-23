@@ -7,7 +7,7 @@ export default class UserController {
    * @param stance_id number ハッカソンへのスタンスを示す選択肢のID
    * @return number スコア。0以上100以下の小数点第一位までの少数。
    */
-  getScore(user, skill_ids, experience_id, stance_id) {
+  #getScore(user, skill_ids, experience_id, stance_id) {
     const skillWeight = 40 / skill_ids.length;
     const experienceWeight = 30;
     const stanceWeight = 30;
