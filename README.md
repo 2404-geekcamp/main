@@ -201,3 +201,44 @@ CREATE TABLE user_skills (
 .env.exampleファイルをコピーして.envファイルを作成<br>
 supabaseのプロジェクトの中のサイドバーのproject settingsのページに飛ぶ<br>
 APIという項目があるのでそのにPorjectURLとProjectAPIkeysのanonpublicの方をそれぞれSUPABASE_PROJECT_URLとSUPABASE_PROJECT_KEYに設定する。
+
+
+## updated_atカラムを更新
+subapaseのSQLEditorで実行
+```
+create extension if not exists moddatetime schema extensions;
+
+create trigger handle_updated_at before update on public.users
+  for each row execute procedure moddatetime (updated_at);
+
+create trigger handle_updated_at before update on public.chats
+  for each row execute procedure moddatetime (updated_at);
+
+create trigger handle_updated_at before update on public.skills
+  for each row execute procedure moddatetime (updated_at);
+
+create trigger handle_updated_at before update on public.experience_options
+  for each row execute procedure moddatetime (updated_at);
+
+create trigger handle_updated_at before update on public.stance_options
+  for each row execute procedure moddatetime (updated_at);
+
+create trigger handle_updated_at before update on public.chat_histories
+  for each row execute procedure moddatetime (updated_at);
+
+create trigger handle_updated_at before update on public.joins
+  for each row execute procedure moddatetime (updated_at);
+
+create trigger handle_updated_at before update on public.invite_messages
+  for each row execute procedure moddatetime (updated_at);
+
+create trigger handle_updated_at before update on public.user_skills
+  for each row execute procedure moddatetime (updated_at);
+```
+
+# タイムゾーンをAsia/Tokyoに変更する
+supabaseのSQLEditorで実行
+```
+alter database postgres
+set timezone to 'Asia/Tokyo';
+```
