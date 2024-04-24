@@ -27,6 +27,24 @@ class UserModel {
         
         return error ? false : true;
     }
+
+    /**
+     ユーザーデータが存在するか検索する。
+    @params email string
+    @params password_hash string
+    @return boolean 存在するか
+    */
+    async isExist(email, password_hash) {
+        const { data, error } = await this.#connection
+            .from('users')
+            .select()
+            .match({
+                email:         email,
+                password_hash: password_hash
+            });
+        
+        return data.length ? true : false
+    }
 }
 
 module.exports = UserModel;
