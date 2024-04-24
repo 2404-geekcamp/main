@@ -1,11 +1,11 @@
 import React from 'react'
 
-const chatsId = () => {
+const ChatsId = () => {
   return (
     <div>
-      
+
     </div>
   )
 }
 
-export default chatsId;
+export default ChatsId;

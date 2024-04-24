@@ -1,11 +1,11 @@
 import React from 'react'
 
-const chats = () => {
+const Chats = () => {
   return (
     <div>
-      
+
     </div>
   )
 }
 
-export default chats;
+export default Chats;
