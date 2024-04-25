@@ -1,19 +1,32 @@
 # 環境構築手順
 ## ライブラリのインストール
-
-
-```sh
-npm i
-```
-
+### Webサーバ側（React）
 ```sh
 cd client
-npm install
-cd ../
+npm i
+cd ..
 ```
 
-## 実行
+### APIサーバ側（Express）
 ```sh
+cd server
+npm i
+cd ..
+```
+
+
+## 実行
+※ 2枚コンソールを起動して、それぞれの画面で実行してね
+
+### Webサーバ側（React）
+```sh
+cd client
+npm run dev
+```
+
+### APIサーバ側（Express）
+```sh
+cd server
 npm run dev
 ```
 
