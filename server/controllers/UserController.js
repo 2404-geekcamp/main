@@ -1,6 +1,14 @@
 const UserModel = require("../models/UserModel");
 var crypto = require('crypto');
-class UserController {
+
+
+module.exports = class UserController {
+
+  #db = null;
+
+  constructor(db) {
+    this.#db = db;
+  }
   /**
    * 対象とするユーザー、検索条件を受け取り、ユーザーのスコアを返す。
    * @param user Object ユーザー情報
@@ -39,7 +47,7 @@ class UserController {
   @params req HttpRequest
 */
   async login(req) {
-    const userModel = new UserModel();
+    const userModel = new UserModel(this.#db);
     const email = req.body.email;
     const password_hash = req.body.password; //ハッシュ関数を適用する
     const isUser = await userModel.isExist(email, password_hash);
@@ -48,5 +56,3 @@ class UserController {
     return true;
   }
 }
-
-module.exports = UserController;

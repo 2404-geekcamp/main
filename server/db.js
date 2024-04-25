@@ -5,8 +5,15 @@ require('dotenv').config({
     path: path.resolve(__dirname, './config/environment/.env') 
 });
 
-const supabaseSetup = () => {
-    return createClient(process.env.SUPABASE_PROJECT_URL, process.env.SUPABASE_PROJECT_KEY);
+module.exports = class Db {
+    #connect = null;
+    
+    constructor() {
+        this.#connect = createClient(process.env.SUPABASE_PROJECT_URL, process.env.SUPABASE_PROJECT_KEY);
+    }
+
+    connect() {
+        return this.#connect;
+    }
 }
 
-module.exports = supabaseSetup;

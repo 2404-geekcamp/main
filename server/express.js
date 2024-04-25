@@ -8,6 +8,16 @@ var app = express();
 const cors = require('cors');
 var session = require('express-session');
 var crypto = require('crypto');
+var Db = require('./db');
+const db = new Db();
+
+//セッション管理
+app.use(session({
+  secret: crypto.randomBytes(32).toString('hex'),
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60 * 60 * 1000 }
+}));
 
 
 app.use(logger('dev'));
@@ -18,15 +28,7 @@ app.use(cors());
 
 // React 側で表示するので、テンプレートエンジンは不要
 app.set('view engine', null);
-app.use('/', indexRouter);
-
-//セッション管理
-app.use(session({
-  secret: crypto.randomBytes(32).toString('hex'),
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 60 * 60 * 1000 }
-}));
+app.use('/', indexRouter(db));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
