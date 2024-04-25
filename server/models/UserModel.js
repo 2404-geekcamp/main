@@ -22,8 +22,22 @@ module.exports = class UserModel {
                 'experience_option_id': experience_option_id,
                 'stance_option_id':     stance_option_id
             });
-        
+
         return error ? false : true;
+    }
+
+    /**
+     * ユーザー一覧を取得する。
+     * @params number max 最大取得数（省略可）
+     * @returns Object[] ユーザー情報の配列
+     */
+    async fetchAll(max=100) {
+        const { data, error } = await this.#db.connect()
+            .from('users')
+            .select()
+            .limit(max);
+
+        return data;
     }
 
     /**
@@ -40,7 +54,7 @@ module.exports = class UserModel {
                 email:         email,
                 password_hash: password_hash
             });
-        
+
         return data.length ? true : false
     }
 }
