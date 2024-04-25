@@ -92,4 +92,33 @@ describe('UserController', () => {
       expect(score).not.toBe(100 - skillWeight);
     });
   });
+
+
+  describe("search", () => {
+    it("スコア順にソートされた状態でユーザー情報を返すか", async () => {
+      // prepare
+      const skill_ids = [1, 2, 3];
+      const experience_id = 1;
+      const stance_id = 2;
+      const users = [
+        { id: 1, skill_ids: [1, 2, 3], experience_id: 3, stance_id: 3 },  //  score: 70
+        { id: 2, skill_ids: [1, 2, 3], experience_id: 1, stance_id: 2 },  // score: 100
+        { id: 3, skill_ids: [1, 2, 3], experience_id: 3, stance_id: 3 }  // score: 40
+      ];
+      const userModel = {
+        fetchAll: jest.fn().mockResolvedValue(users)
+      };
+      userController.userModel = userModel;
+
+      const expectedUsers = [
+        {user: { id: 1, skill_ids: [1, 2, 3], experience_id: 1, stance_id: 2, score: 100 }, score: 100 },
+        { user: { id: 1, skill_ids: [1, 2, 3], experience_id: 3, stance_id: 3, score: 70 }, score: 70 },
+        { user: { id: 3, skill_ids: [1, 2, 3], experience_id: 3, stance_id: 3, score: 40 }, score: 40 },
+      ];
+
+      const result = await userController.search(skill_ids, experience_id, stance_id);
+
+      expect(result).toEqual(expectedUsers);
+    })
+  })
 });
