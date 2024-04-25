@@ -3,22 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./config/routes/index');
-
 var app = express();
+const cors = require('cors');
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());
 
-// 静的ファイルの位置をReact側のビルドファイルに
-app.use(express.static(path.join(__dirname, 'client/public')));
-app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "build", "index.html"));
-});
-
+// React 側で表示するので、テンプレートエンジンは不要
+app.set('view engine', null);
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
