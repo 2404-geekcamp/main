@@ -1,4 +1,6 @@
-export default class UserController {
+const UserModel = require("../models/UserModel");
+var crypto = require('crypto');
+class UserController {
   /**
    * 対象とするユーザー、検索条件を受け取り、ユーザーのスコアを返す。
    * @param user Object ユーザー情報
@@ -31,4 +33,20 @@ export default class UserController {
     score = Math.round(score * 10) / 10;
     return score;
   }
+
+  /**
+  ユーザーの入力を受け取り、ログインを試行する。
+  @params req HttpRequest
+*/
+  async login(req) {
+    const userModel = new UserModel();
+    const email = req.body.email;
+    const password_hash = req.body.password; //ハッシュ関数を適用する
+    const isUser = await userModel.isExist(email, password_hash);
+    if(!isUser) return false;
+    req.session.loginKey = crypto.randomBytes(32).toString('hex');
+    return true;
+  }
 }
+
+module.exports = UserController;
