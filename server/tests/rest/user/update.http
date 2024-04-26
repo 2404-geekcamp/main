@@ -1,0 +1,7 @@
+curl -X PUT \
+  http://localhost:3001/  \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "user_id": 9,
+    "name": "name_update"
+  }'
