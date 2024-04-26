@@ -1,6 +1,6 @@
 const UserModel = require("../models/UserModel");
+const UserSkillController = require("./UserSkillController");
 var crypto = require('crypto');
-
 
 module.exports = class UserController {
   #db = null;
@@ -16,14 +16,17 @@ module.exports = class UserController {
    * @return Object[] ユーザー情報の配列
    */
   async search(skill_ids, experience_id, stance_id) {
+    const userSkillController = new UserSkillController(this.#db);
     const userModel = new UserModel(this.#db);
     const users = await userModel.fetchAll();
-    const scoredUsers = users.map(user => {
-      return {
+    const scoredUsers = [];
+    for (const user of users) {
+      user.skill_ids = await userSkillController.fetch(user.id);
+      scoredUsers.push({
         ...user,
-        score: this.#getScore(user, skill_ids, experience_id, stance_id)
-      };
-    });
+        score: this.getScore(user, skill_ids, experience_id, stance_id)
+      });
+    }
     scoredUsers.sort((a, b) => b.score - a.score);
     return scoredUsers;
   }
@@ -36,25 +39,24 @@ module.exports = class UserController {
    * @param stance_id number ハッカソンへのスタンスを示す選択肢のID
    * @return number スコア。0以上100以下の小数点第一位までの少数。
    */
-  #getScore(user, skill_ids, experience_id, stance_id) {
-    const skillWeight = 40 / skill_ids.length;
-    const experienceWeight = 30;
-    const stanceWeight = 30;
+  getScore(user, skill_ids, experience_id, stance_id) {
+    const skillWeight = 70 / skill_ids.length;
+    const experienceWeight = 15;
+    const stanceWeight = 15;
 
-    let score = 100;
+    let score = 0;
 
-    if (user.skill_ids && user.skill_ids.length > 0) {
-      for (const skillId of user.skill_ids) {
-        if (!skill_ids.includes(skillId)) {
-          score -= skillWeight;
-        }
+    for (const skillId of skill_ids) {
+      if (user.skill_ids.includes(skillId)) {
+        score += skillWeight;
       }
     }
-    if (user.experience_id && user.experience_id !== experience_id) {
-      score -= experienceWeight;
+
+    if (user.experience_option_id === experience_id) {
+      score += experienceWeight;
     }
-    if (user.stance_id && user.stance_id !== stance_id) {
-      score -= stanceWeight;
+    if (user.stance_option_id === stance_id) {
+      score += stanceWeight;
     }
 
     score = Math.round(score * 10) / 10;

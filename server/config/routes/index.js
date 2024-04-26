@@ -1,21 +1,15 @@
-var express = require('express');
-var UserController = require('../../app/controllers/UserController');
-var UserSkillController = require('../../app/controllers/UserSkillController');
-var router = express.Router();
+let express = require('express');
+let UserController = require('../../app/controllers/UserController');
+let router = express.Router();
+let UserSkillController = require('../../app/controllers/UserSkillController');
 
 
-module.exports = function(db) {
-  router.get('/', async function(req, res, next) {
+module.exports = function (db) {
+  router.post('/search', async function (req, res, next) {
     const userController = new UserController(db);
-    req.body.email = "Tanaka";
-    req.body.password = "Tanaka";
-    await userController.login(req);
-    res.json(req.session);
-  });
-
-  router.get('/feeds', function(req, res, next) {
-    res.json({ message: 'Hello, world!' });
-  });
+    const users = await userController.search(req.body.skill_ids, req.body.experience_id, req.body.stance_id);
+    res.json(users);
+  })
 
   router.get("/user_skills/:user_id", async function (req, res, next) {
     const userSkillController = new UserSkillController(db);

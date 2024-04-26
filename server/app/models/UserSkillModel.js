@@ -1,4 +1,4 @@
-module.exports = class UserSkilModel {
+module.exports = class UserSkillModel {
   #db = null;
 
   constructor(db) {
@@ -13,7 +13,7 @@ module.exports = class UserSkilModel {
   async fetch(user_id) {
     const { data, error } = await this.#db.connect()
       .from('user_skills')
-      .select("skill_id")
+      .select()
       .match({
         user_id: user_id
       });
