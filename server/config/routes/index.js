@@ -1,5 +1,6 @@
 var express = require('express');
-var UserController = require('../../controllers/UserController');
+var UserController = require('../../app/controllers/UserController');
+var UserSkillController = require('../../app/controllers/UserSkillController');
 var router = express.Router();
 
 
@@ -17,9 +18,9 @@ module.exports = function(db) {
   });
 
   router.get("/user_skills/:user_id", async function (req, res, next) {
-    const userController = new UserController(db);
+    const userSkillController = new UserSkillController(db);
     const user_id = req.params.user_id;
-    const data = await userController.fetch(user_id);
+    const data = await userSkillController.fetch(user_id);
     res.json(data);
   });
 
