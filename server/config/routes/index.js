@@ -1,6 +1,8 @@
 let express = require('express');
 let UserController = require('../../app/controllers/UserController');
 let router = express.Router();
+let UserSkillController = require('../../app/controllers/UserSkillController');
+
 
 module.exports = function (db) {
   router.post('/search', async function (req, res, next) {
@@ -8,6 +10,13 @@ module.exports = function (db) {
     const users = await userController.search(req.body.skill_ids, req.body.experience_id, req.body.stance_id);
     res.json(users);
   })
+
+  router.get("/user_skills/:user_id", async function (req, res, next) {
+    const userSkillController = new UserSkillController(db);
+    const user_id = req.params.user_id;
+    const data = await userSkillController.fetch(user_id);
+    res.json(data);
+  });
 
   return router;
 }
