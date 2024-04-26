@@ -1,7 +1,6 @@
-var express = require('express');
-var UserController = require('../../controllers/UserController');
-var router = express.Router();
-
+let express = require('express');
+let UserController = require('../../app/controllers/UserController');
+let router = express.Router();
 
 module.exports = function (db) {
   router.post('/search', async function (req, res, next) {
