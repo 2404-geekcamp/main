@@ -25,5 +25,12 @@ module.exports = function (db) {
     res.json(result);
   });
 
+  router.get("/chats/user/:user_id", async function (req, res, next) {
+    const chatController = new ChatController(db);
+    const user_id = req.params.user_id;
+    const data = await chatController.fetch(user_id);
+    res.json(data);
+  });
+
   return router;
 }
