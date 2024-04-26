@@ -13,7 +13,7 @@ module.exports = class UserSkillModel {
   async fetch(user_id) {
     const { data, error } = await this.#db.connect()
       .from('user_skills')
-      .select("skill_id")
+      .select()
       .match({
         user_id: user_id
       });

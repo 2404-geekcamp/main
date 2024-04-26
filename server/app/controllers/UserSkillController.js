@@ -1,3 +1,5 @@
+const UserSkillModel = require('../models/UserSkillModel.js');
+
 module.exports = class UserSkillController {
   #db = null;
   constructor(db) {
@@ -10,13 +12,8 @@ module.exports = class UserSkillController {
    * @return int[] スキルidの配列
    */
   async fetch(user_id) {
-    const { data, error } = await this.#db.connect()
-      .from('user_skills')
-      .select("skill_id")
-      .match({
-        user_id: user_id
-      });
-
-    return data.map(obj => obj.skill_id);
+    const model = new UserSkillModel(this.#db);
+    const skills = await model.fetch(user_id);
+    return skills.map(skill => skill.skill_id);
   }
 }
