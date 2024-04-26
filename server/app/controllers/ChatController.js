@@ -11,7 +11,7 @@ module.exports = class ChatController {
    * @return boolean 成功したか
    */
   async create() {
-    const ChatModel = new ChatModel(this.#db);
-    return await ChatModel.create();
+    const model = new ChatModel(this.#db);
+    return await model.create();
   }
 }
