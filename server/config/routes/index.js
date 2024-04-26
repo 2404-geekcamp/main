@@ -29,7 +29,7 @@ module.exports = function (db) {
   // invite message
   router.post("/invite_messages", async function (req, res, next) {
     const inviteMessageController = new InviteMessageController(db);
-    const result = await inviteMessageController.create(req.body.to_user_id, req.body.from_user_id, req.body.content);
+    const result = await inviteMessageController.create(req.body.receiver_id, req.body.sender_id, req.body.content);
     res.json(result);
   });
 
