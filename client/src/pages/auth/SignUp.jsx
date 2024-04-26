@@ -19,7 +19,7 @@ const SignUp = () => {
         <input type="password" name="password" id="password" />
         <button type="submit">登録</button>
       </form>
-      <Link to="/login" className='toLogin'>ログイン画面へ</Link>
+      <Link to="/signin" className='toLogin'>ログイン画面へ</Link>
     </div>
   )
 }
