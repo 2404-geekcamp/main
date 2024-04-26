@@ -6,8 +6,8 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
-    <div className=''>
-      <h1 className='text-center text-3xl font-bold my-10'>ログイン</h1>
+    <div className='h-screen pt-32'>
+      <h1 className='text-center text-3xl font-bold py-10'>ログイン</h1>
       <form action="" className='flex flex-col mx-auto w-[300px]'>
         <label htmlFor="email">メールアドレス</label>
         <input type="email" name="email" id="email" className='mt-[5px] mb-[20px] h-[40px] border-2' onChange={(e)=>setEmail(e.target.value)} value={email}/>
