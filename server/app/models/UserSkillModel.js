@@ -1,4 +1,4 @@
-module.exports = class UserSkilModel {
+module.exports = class UserSkillModel {
   #db = null;
 
   constructor(db) {
