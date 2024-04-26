@@ -5,7 +5,12 @@ module.exports = class ChatModel {
   }
 
   /**
-   * ユーザー情報を全て取得する。
-   * @return Object[] ユーザー情報の配列
+   * チャットを新しく作成する。
+   * @return boolean 成功したか
    */
+  async create() {
+    const { error } = await this.#db.connect()
+      .from('chats')
+      .insert({});
+  }
 }
