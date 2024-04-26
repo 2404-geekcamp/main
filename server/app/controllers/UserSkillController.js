@@ -1,4 +1,4 @@
-export default class UserSkillController {
+module.exports = class UserSkillController {
   #db = null;
   constructor(db) {
     this.#db = db;

@@ -1,4 +1,4 @@
-export default class UserSkilModel {
+module.exports = class UserSkilModel {
   #db = null;
 
   constructor(db) {
