@@ -33,5 +33,17 @@ module.exports = function (db) {
     res.json(result);
   });
 
+  router.get("/invite_messages/received/:user_id", async function (req, res, next) {
+    const inviteMessageController = new InviteMessageController(db);
+    const result = await inviteMessageController.fetchReceived(req.params.user_id);
+    res.json(result);
+  })
+
+  router.get("/invite_messages/received/:user_id/unchecked", async function (req, res, next) {
+    const inviteMessageController = new InviteMessageController(db);
+    const result = await inviteMessageController.fetchReceived(req.params.user_id, true);
+    res.json(result);
+  })
+
   return router;
 }

@@ -27,4 +27,22 @@ module.exports = class InviteMessageModel {
 
     return data?.id;
   }
+
+  /**
+   * ユーザーidを指定して、そのユーザーが受信した招待メッセージを取得する。
+   * @param user_id {number} 招待メッセージの受信先ユーザーID
+   * @return array 招待メッセージの配列。
+   */
+  async fetchReceived(user_id) {
+    const { data, error } = await this.#db.connect()
+      .from('invite_messages')
+      .select()
+      .eq('receiver_id', user_id);
+    if (error) {
+      console.error(error);
+      return [];
+    }
+
+    return data;
+  }
 }
