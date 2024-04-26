@@ -41,7 +41,7 @@ module.exports = function (db) {
 
   router.get("/invite_messages/:user_id/unchecked", async function (req, res, next) {
     const inviteMessageController = new InviteMessageController(db);
-    const result = await inviteMessageController.fetchReceived(req.params.user_id, false);
+    const result = await inviteMessageController.fetchReceived(req.params.user_id, true);
     res.json(result);
   })
 
