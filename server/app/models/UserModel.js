@@ -29,16 +29,38 @@ module.exports = class UserModel {
     /**
      * ユーザー情報を更新する
      * @params Object リクエストから送られてきたユーザー情報
+     * @params List リクエストから送られてきたスキル情報
      * @params 更新対象のユーザーID
      * @return bool DBへの更新が成功したか否かをbool値で返す。trueの場合は成功、falseの場合は失敗
      */
-    async update(user, id) {
+    async update(user, user_skills, id) {
         const { error } = await this.#db.connect()
             .from('users')
             .update(user)
             .eq('id', id);
         
-        return error ? false : true;
+        if(error) return false;
+
+        const { error2 } = await this.#db.connect()
+                .from('user_skills')
+                .delete()
+                .eq('user_id', id);
+        
+        if(error2) return false;
+
+        const userHasSkills = [];
+        user_skills.forEach(skill_id => {
+            userHasSkills.push({
+                'user_id': id,
+                'skill_id': skill_id
+            });
+        });
+
+        const { error3 } = await this.#db.connect()
+            .from('user_skills')
+            .insert(userHasSkills);
+        
+        return error3 ? false : true;
     }
 
     /**

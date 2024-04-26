@@ -11,7 +11,7 @@ module.exports = function (db) {
     res.json(users);
   });
 
-  router.put('/user_update', async function(req, res, next) {
+  router.patch('/user_update', async function(req, res, next) {
     const userController = new UserController(db);
     const isUpdate = await userController.update(req);
     res.json(isUpdate);

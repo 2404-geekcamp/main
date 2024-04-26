@@ -1,7 +1,8 @@
-curl -X PUT \
-  http://localhost:3001/  \
+curl -X PATCH \
+  http://localhost:3001/user_update  \
   -H 'Content-Type: application/json' \
   -d '{
     "user_id": 9,
-    "name": "name_update"
+    "name": "name_update",
+    "skill_ids": [1, 2, 3]
   }'
