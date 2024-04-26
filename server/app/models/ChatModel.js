@@ -11,8 +11,9 @@ module.exports = class ChatModel {
   async create() {
     const { data, error } = await this.#db.connect()
       .from('chats')
-      .insert({})
+      .insert()
       .single();
+    console.log(data);
     return data?.id;
   }
 }
