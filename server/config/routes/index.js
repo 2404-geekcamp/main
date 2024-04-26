@@ -39,5 +39,11 @@ module.exports = function (db) {
     res.json(result);
   })
 
+  router.get("/invite_messages/:user_id/unchecked", async function (req, res, next) {
+    const inviteMessageController = new InviteMessageController(db);
+    const result = await inviteMessageController.fetchReceived(req.params.user_id, false);
+    res.json(result);
+  })
+
   return router;
 }

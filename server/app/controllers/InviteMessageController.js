@@ -21,11 +21,15 @@ module.exports = class InviteMessageController {
   /**
    * ユーザーidを指定して、そのユーザーが受信した招待メッセージを取得する。
    * @param user_id {number} 招待メッセージの受信先ユーザーID
-   * @param includeChecked {boolean} 既読のメッセージも取得するかどうか
+   * @param excludeChecked {boolean} 既読のメッセージを含めるかどうか
    * @return array 招待メッセージの配列。
    */
-  async fetchReceived(user_id) {
+  async fetchReceived(user_id, includeChecked = true) {
     const model = new InviteMessageModel(this.#db);
-    return await model.fetchReceived(user_id);
+    const data = await model.fetchReceived(user_id);
+    if (excludeChecked) {
+      data = data.filter((message) => !message.is_checked);
+    }
+    return data;
   }
 }
