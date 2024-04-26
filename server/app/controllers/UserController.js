@@ -41,15 +41,15 @@ module.exports = class UserController {
     const experienceWeight = 30;
     const stanceWeight = 30;
 
-    let score = 100;
+    let score = experienceWeight + stanceWeight;
 
-    if (user.skill_ids && user.skill_ids.length > 0) {
-      for (const skillId of user.skill_ids) {
-        if (!skill_ids.includes(skillId)) {
-          score -= skillWeight;
-        }
+
+    for (const skillId of skill_ids) {
+      if (user.skill_ids.includes(skillId)) {
+        score += skillWeight;
       }
     }
+
     if (user.experience_id && user.experience_id !== experience_id) {
       score -= experienceWeight;
     }
