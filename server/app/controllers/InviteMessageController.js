@@ -24,9 +24,9 @@ module.exports = class InviteMessageController {
    * @param excludeChecked {boolean} 既読のメッセージを含めるかどうか
    * @return array 招待メッセージの配列。
    */
-  async fetchReceived(user_id, includeChecked = true) {
+  async fetchReceived(user_id, excludeChecked = true) {
     const model = new InviteMessageModel(this.#db);
-    const data = await model.fetchReceived(user_id);
+    let data = await model.fetchReceived(user_id);
     if (excludeChecked) {
       data = data.filter((message) => !message.is_checked);
     }
