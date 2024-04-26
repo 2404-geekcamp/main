@@ -6,11 +6,13 @@ module.exports = class ChatModel {
 
   /**
    * チャットを新しく作成する。
-   * @return boolean 成功したか
+   * @return number 作成されたチャットのID
    */
   async create() {
-    const { error } = await this.#db.connect()
+    const { data, error } = await this.#db.connect()
       .from('chats')
-      .insert({});
+      .insert({})
+      .single();
+    return data?.id;
   }
 }

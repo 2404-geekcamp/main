@@ -8,7 +8,7 @@ module.exports = class ChatController {
 
   /**
    * チャットを新しく作成する。
-   * @return boolean 成功したか
+   * @return id 作成されたチャットのID
    */
   async create() {
     const model = new ChatModel(this.#db);
