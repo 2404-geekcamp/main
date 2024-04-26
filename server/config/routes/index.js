@@ -18,5 +18,11 @@ module.exports = function (db) {
     res.json(data);
   });
 
+  router.post("/chat/create", async function (req, res, next) {
+    const chatController = new ChatController(db);
+    const result = await chatController.create();
+    res.json(result);
+  });
+
   return router;
 }
