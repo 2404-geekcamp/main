@@ -3,6 +3,7 @@ let UserController = require('../../app/controllers/UserController');
 let router = express.Router();
 let UserSkillController = require('../../app/controllers/UserSkillController');
 let ChatController = require('../../app/controllers/ChatController');
+const InviteMessageController = require('../../app/controllers/InviteMessageController');
 
 
 module.exports = function (db) {
@@ -22,6 +23,13 @@ module.exports = function (db) {
   router.post("/chat/create", async function (req, res, next) {
     const chatController = new ChatController(db);
     const result = await chatController.create();
+    res.json(result);
+  });
+
+  // invite message
+  router.post("/invite_messages", async function (req, res, next) {
+    const inviteMessageController = new InviteMessageController(db);
+    const result = await inviteMessageController.create(req.body.receiver_id, req.body.sender_id, req.body.content);
     res.json(result);
   });
 
