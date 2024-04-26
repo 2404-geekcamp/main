@@ -12,8 +12,8 @@ module.exports = class JoinModel {
   async fetch(user_id) {
     const { data, error } = await this.#db.connect()
       .from('joins')
-      .where('user_id', user_id)
-      .select('chat_id');
+      .select()
+      .eq('user_id', user_id);
     if (error) {
       console.error(error);
       return null;
