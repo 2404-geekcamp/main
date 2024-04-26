@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../styles/SignUp.css'
 
 const SignUp = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <div className='wrapper'>
       <h1>新規登録</h1>
