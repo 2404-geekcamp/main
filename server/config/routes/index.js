@@ -2,6 +2,7 @@ let express = require('express');
 let UserController = require('../../app/controllers/UserController');
 let router = express.Router();
 let UserSkillController = require('../../app/controllers/UserSkillController');
+let ChatController = require('../../app/controllers/ChatController');
 
 
 module.exports = function (db) {
