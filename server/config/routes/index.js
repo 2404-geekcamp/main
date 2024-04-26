@@ -33,5 +33,11 @@ module.exports = function (db) {
     res.json(result);
   });
 
+  router.get("/invite_messages/:user_id", async function (req, res, next) {
+    const inviteMessageController = new InviteMessageController(db);
+    const result = await inviteMessageController.fetchReceivedMessages(req.params.user_id);
+    res.json(result);
+  })
+
   return router;
 }

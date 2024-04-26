@@ -27,4 +27,25 @@ module.exports = class InviteMessageModel {
 
     return data?.id;
   }
+
+  /**
+   * ユーザーidを指定して、そのユーザーが受信した招待メッセージを取得する。
+   * @param user_id {number} 招待メッセージの受信先ユーザーID
+   * @param limit {number} 取得する招待メッセージの最大数。デフォルトは50
+   * @param includeChecked {boolean} 既読済みの招待メッセージも取得するかどうか。デフォルトはtrue
+   * @return array 招待メッセージの配列。
+   */
+  async fetchReceivedMessages(user_id, limit = 50, includeChecked = true) {
+    const { data, error } = await this.#db.connect()
+      .from('invite_messages')
+      .where('receiver_id', user_id)
+      .limit(limit)
+      .orderBy('created_at', 'desc');
+    if (error) {
+      console.error(error);
+      return [];
+    }
+
+    return data;
+  }
 }
