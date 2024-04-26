@@ -35,7 +35,11 @@ module.exports = function (db) {
 
   router.get("/invite_messages/:user_id", async function (req, res, next) {
     const inviteMessageController = new InviteMessageController(db);
-    const result = await inviteMessageController.fetchReceivedMessages(req.params.user_id);
+    const result = await inviteMessageController.fetchReceived(
+      req.params.user_id,
+      req.params.limit ?? 50,
+      req.params.includeChecked ?? true
+    );
     res.json(result);
   })
 
