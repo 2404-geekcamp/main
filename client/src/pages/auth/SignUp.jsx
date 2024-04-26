@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
-import '../../styles/SignUp.css'
 import { Link } from "react-router-dom";
-import '../../styles/global.css'
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
-    <div className='wrapper'>
+    <div className=''>
       <h1>新規登録</h1>
       <form action="">
         <label htmlFor="username">ユーザー名</label>
