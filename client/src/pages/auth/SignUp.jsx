@@ -8,7 +8,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
-    <div className='wrapper'>
+    <div className=''>
       <h1>新規登録</h1>
       <form action="">
         <label htmlFor="username">ユーザー名</label>
