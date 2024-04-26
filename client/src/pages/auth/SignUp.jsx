@@ -6,7 +6,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
-    <div className=''>
+    <div className='h-screen pt-32'>
       <h1 className='text-center text-3xl font-bold my-10'>新規登録</h1>
       <form action="" className='flex flex-col mx-auto w-[300px]'>
         <label htmlFor="username">ユーザー名</label>
