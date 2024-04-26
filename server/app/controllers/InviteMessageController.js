@@ -21,12 +21,11 @@ module.exports = class InviteMessageController {
   /**
    * ユーザーidを指定して、そのユーザーが受信した招待メッセージを取得する。
    * @param user_id {number} 招待メッセージの受信先ユーザーID
-   * @param limit {number} 取得する招待メッセージの最大数。デフォルトは50
-   * @param includeChecked {boolean} 既読済みの招待メッセージも取得するかどうか。デフォルトはtrue
+   * @param includeChecked {boolean} 既読のメッセージも取得するかどうか
    * @return array 招待メッセージの配列。
    */
-  async fetchReceived(user_id, limit, includeChecked) {
+  async fetchReceived(user_id, includeChecked = true) {
     const model = new InviteMessageModel(this.#db);
-    return await model.fetchReceived(user_id, limit, includeChecked);
+    return await model.fetchReceived(user_id, includeChecked);
   }
 }

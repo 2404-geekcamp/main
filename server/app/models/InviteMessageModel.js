@@ -31,16 +31,15 @@ module.exports = class InviteMessageModel {
   /**
    * ユーザーidを指定して、そのユーザーが受信した招待メッセージを取得する。
    * @param user_id {number} 招待メッセージの受信先ユーザーID
-   * @param limit {number} 取得する招待メッセージの最大数
-   * @param includeChecked {boolean} 既読済みの招待メッセージも取得するかどうか
+   * @param includeChecked {boolean} 既読のメッセージも取得するかどうか
    * @return array 招待メッセージの配列。
    */
-  async fetchReceived(user_id, limit, includeChecked) {
+  async fetchReceived(user_id, includeChecked) {
     const { data, error } = await this.#db.connect()
       .from('invite_messages')
-      .where('receiver_id', user_id)
-      .limit(limit)
-      .orderBy('created_at', 'desc');
+      .select()
+      .eq('receiver_id', user_id)
+      .eq('checked', includeChecked);
     if (error) {
       console.error(error);
       return [];
