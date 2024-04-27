@@ -3,6 +3,7 @@ let UserController = require('../../app/controllers/UserController');
 let router = express.Router();
 let UserSkillController = require('../../app/controllers/UserSkillController');
 let ChatController = require('../../app/controllers/ChatController');
+let ChatListController = require('../../app/controllers/ChatListController');
 
 
 module.exports = function (db) {
@@ -22,6 +23,13 @@ module.exports = function (db) {
   router.post("/chat/create", async function (req, res, next) {
     const chatController = new ChatController(db);
     const result = await chatController.create();
+    res.json(result);
+  });
+
+  router.get("/chat", async function (req, res, next) {
+    const user_id = req.header('user_id');
+    const chatListController = new ChatListController(db);
+    const result = await chatListController.fetch(user_id);
     res.json(result);
   });
 
