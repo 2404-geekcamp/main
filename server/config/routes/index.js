@@ -8,6 +8,7 @@ const InviteMessageController = require('../../app/controllers/InviteMessageCont
 const JoinController = require('../../app/controllers/JoinController');
 const ChatListController = require('../../app/controllers/ChatListController');
 const SkillController = require('../../app/controllers/SkillController');
+const ExperienceOptionController = require('../../app/controllers/ExperienceOptionController');
 
 
 module.exports = function (db) {
@@ -91,6 +92,13 @@ module.exports = function (db) {
   router.get("/skills", async function (req, res, next) {
     const skillController = new SkillController(db);
     const result = await skillController.fetchAll();
+    res.json(result);
+  });
+
+  // experience_option
+  router.get("/experience_options", async function (req, res, next) {
+    const experienceOptionController = new ExperienceOptionController(db);
+    const result = await experienceOptionController.fetch();
     res.json(result);
   });
 
