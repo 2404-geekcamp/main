@@ -1,5 +1,5 @@
 import React from "react";
-import ChatPreview from "./ChatsPreview";
+import ChatPreview from "../../components/ChatsPreview";
 
 const Chats = () => {
   return (
