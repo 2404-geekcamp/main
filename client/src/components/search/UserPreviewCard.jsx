@@ -4,8 +4,8 @@ import UserSkillBadges from "./UserSkillBadges";
 
 const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 
-const UserPreviewCard = (user) => {
-
+const UserPreviewCard = ({user}) => {
+  console.log(user);
   return (
     <div className="mx-10 px-10 border-2 rounded-lg border-black mb-2">
       <div className="flex justify-between pt-4">
