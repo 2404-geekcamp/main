@@ -96,6 +96,12 @@ module.exports = function (db) {
     res.json(result);
   });
 
+  router.get("/skill/:id", async function (req, res, next) {
+    const skillController = new SkillController(db);
+    const result = await skillController.fetchById(req.params.id);
+    res.json(result);
+  });
+
   // experience_option
   router.get("/experience_options", async function (req, res, next) {
     const experienceOptionController = new ExperienceOptionController(db);
