@@ -17,17 +17,19 @@ const userId = () => {
       <div>
           <p className='text-xl font-bold mt-10'>技術</p>
           <div className='flex max-w-full flex-wrap w-4/5	'>
-          <p className='mx-6 my-2 bg-white p-1 rounded-lg'>Sample</p>
-          <p className='mx-6 my-2 bg-white p-1 rounded-lg'>Sample</p>
-          <p className='mx-6 my-2 bg-white p-1 rounded-lg'>Sample</p>
-          <p className='mx-6 my-2 bg-white p-1 rounded-lg'>Sample</p>
-          <p className='mx-6 my-2 bg-white p-1 rounded-lg'>Sample</p>
-          <p className='mx-6 my-2 bg-white p-1 rounded-lg'>Sample</p>
-          <p className='mx-6 my-2 bg-white p-1 rounded-lg'>Sample</p>
-          
-          
-          </div>
-          
+          <p className='mx-2 my-2 bg-white p-1 rounded-lg'>Sample</p>
+          <p className='mx-2 my-2 bg-white p-1 rounded-lg'>Sample</p>
+          <p className='mx-2 my-2 bg-white p-1 rounded-lg'>Sample</p>
+          <p className='mx-2 my-2 bg-white p-1 rounded-lg'>Sample</p>
+          <p className='mx-2 my-2 bg-white p-1 rounded-lg'>Sample</p>
+          <p className='mx-2 my-2 bg-white p-1 rounded-lg'>Sample</p>
+          <p className='mx-2 my-2 bg-white p-1 rounded-lg'>Sample</p>
+        </div>
+        <div className=''>
+        <p className='text-xl font-bold mt-10'>自己紹介</p>
+        <p className='mx-2 my-2 bg-white p-1 rounded-lg'>ここに自己紹介テキストが来ます
+        サンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキスト</p>
+        </div>
       </div>
     </div>
     
