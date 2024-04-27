@@ -1,13 +1,18 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import axios from 'axios';
 
-const UserSkillBadges = () => {
+const apiUrl = import.meta.env.VITE_API_SERVER_URL;
+
+const UserSkillBadges = ({skills}) => {
   return (
     <div className="flex flex-wrap py-4">
-      <p className="bg-slate-200 rounded-xl p-1 mr-4 mb-4">フロントエンド</p>
-      <p className="bg-slate-200 rounded-xl p-1 mr-4 mb-4">Figma</p>
-      <p className="bg-slate-200 rounded-xl p-1 mr-4 mb-4">Javascript</p>
-      <p className="bg-slate-200 rounded-xl p-1 mr-4 mb-4">フロントエンド</p>
-      <p className="bg-slate-200 rounded-xl p-1 mr-4 mb-4">フロントエンド</p>
+      {
+        skills.map((skill) => (
+          <p key={skill.id} className="bg-slate-200 rounded-xl p-1 mr-4 mb-4">
+            <UserSkillBadge skill={skill} />
+          </p>
+        ))
+      }
     </div>
   );
 }
