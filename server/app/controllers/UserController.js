@@ -76,4 +76,15 @@ module.exports = class UserController {
     req.session.loginKey = crypto.randomBytes(32).toString('hex');
     return true;
   }
+
+  /**
+   * 対象とするユーザーの情報を返す
+   * @params id
+   * @return Object
+   */
+  async fetchById(id) {
+    const userModel = new UserModel(this.#db);
+    const user = await userModel.fetchOfId(id);
+    return user;
+  }
 }

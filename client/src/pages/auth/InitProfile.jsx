@@ -6,7 +6,7 @@ const InitProfile = () => {
       {/* <h1>{ id }</h1> */}
       <h1 className='text-center text-3xl font-bold my-10'>プロフィール設定</h1>
       <div className='mx-auto'>
-        <h2 className='text-xl font-bold mt-10 '>技術</h2>
+        <h2 className='text-xl font-bold mt-10'>技術</h2>
         <div className='mt-4 flex flex-wrap'>
           <p className='m-1 p-2 bg-slate-200 rounded-full'>サンプル</p>
           <p className='m-1 p-2 bg-slate-200 rounded-full'>フロントエンド</p>
