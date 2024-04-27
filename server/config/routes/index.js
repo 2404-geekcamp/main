@@ -28,6 +28,13 @@ module.exports = function (db) {
     res.json(result);
   });
 
+  // chat history
+  router.get("/chat/:chat_id/histories", async function (req, res, next) {
+    const chatGHistoryController = new chatGHistoryController(db);
+    const result = await chatGHistoryController.fetchByChatId(req.params.chat_id);
+    res.json(result);
+  });
+
   // join
   router.post("/chat/:chat_id/user/:user_id/joins/create", async function (req, res, next) {
     const joinController = new JoinController(db);
