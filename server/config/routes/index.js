@@ -4,6 +4,7 @@ let router = express.Router();
 let UserSkillController = require('../../app/controllers/UserSkillController');
 let ChatController = require('../../app/controllers/ChatController');
 const InviteMessageController = require('../../app/controllers/InviteMessageController');
+const JoinController = require('../../app/controllers/JoinController');
 
 
 module.exports = function (db) {
@@ -20,9 +21,17 @@ module.exports = function (db) {
     res.json(data);
   });
 
+  // chat
   router.post("/chat/create", async function (req, res, next) {
     const chatController = new ChatController(db);
     const result = await chatController.create();
+    res.json(result);
+  });
+
+  // join
+  router.post("/chat/:chat_id/user/:user_id/joins/create", async function (req, res, next) {
+    const joinController = new JoinController(db);
+    const result = await joinController.join(req.params.chat_id, req.params.user_id);
     res.json(result);
   });
 
