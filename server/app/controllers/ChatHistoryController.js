@@ -1,7 +1,21 @@
+const ChatHistoryModel = require("../models/ChatHistoryModel");
+
 module.exports = class ChatHistoryController {
   #db = null;
   constructor(db) {
     this.#db = db;
+  }
+
+  /**
+   * チャット履歴を作成する
+   * @param {number} chatId
+   * @param {number} senderId
+   * @param {string} content
+   * @return {number} 作成したチャット履歴のid
+   */
+  async insert(chatId, senderId, content) {
+    const model = new ChatHistoryModel(this.#db);
+    return await model.insert(chatId, senderId, content);
   }
 
   /**

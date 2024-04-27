@@ -3,7 +3,7 @@ let UserController = require('../../app/controllers/UserController');
 let router = express.Router();
 let UserSkillController = require('../../app/controllers/UserSkillController');
 let ChatController = require('../../app/controllers/ChatController');
-let chatHistoryController = require('../../app/controllers/ChatHistoryController');
+let ChatHistoryController = require('../../app/controllers/ChatHistoryController');
 const InviteMessageController = require('../../app/controllers/InviteMessageController');
 const JoinController = require('../../app/controllers/JoinController');
 
@@ -30,9 +30,19 @@ module.exports = function (db) {
   });
 
   // chat history
+  router.post("/chat/:chat_id/histories/create", async function (req, res, next) {
+    const chatHistoryController = new ChatHistoryController(db);
+    if (!req.body.content) {
+      res.status(400).json({ error: "content is required" });
+      return;
+    }
+    const result = await chatHistoryController.insert(req.params.chat_id, req.body.sender_id, req.body.content);
+    res.json(result);
+  });
+
   router.get("/chat/:chat_id/histories", async function (req, res, next) {
-    const chatGHistoryController = new chatHistoryController(db);
-    const result = await chatGHistoryController.fetchByChatId(req.params.chat_id);
+    const chatHistoryController = new ChatHistoryController(db);
+    const result = await chatHistoryController.fetchByChatId(req.params.chat_id);
     res.json(result);
   });
 
