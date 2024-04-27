@@ -1,6 +1,7 @@
 const UserModel = require("../models/UserModel");
 const UserSkillController = require("./UserSkillController");
 var crypto = require('crypto');
+var bcrypt = require('bcrypt');
 
 module.exports = class UserController {
   #db = null;
@@ -70,8 +71,8 @@ module.exports = class UserController {
   async login(req) {
     const userModel = new UserModel(this.#db);
     const email = req.body.email;
-    const password_hash = req.body.password; //ハッシュ関数を適用する
-    const isUser = await userModel.isExist(email, password_hash);
+    const password = req.body.password;
+    const isUser = await userModel.isExist(email, password);
     if(!isUser) return false;
     req.session.loginKey = crypto.randomBytes(32).toString('hex');
     return true;
@@ -87,4 +88,20 @@ module.exports = class UserController {
     const user = await userModel.fetchOfId(id);
     return user;
   }
+
+  /**
+   * ユーザーからの入力に基づき新規登録する。
+   * @params req HttpRequest
+   * @return bool
+   */
+  async signup(req) {
+    const userModel = new UserModel(this.#db);
+    const newUser = {
+      'name':          req.body.username,
+      'email':         req.body.email,
+      'password_hash': bcrypt.hashSync(req.body.password, 10)
+    }
+    const isCreate = await userModel.insert(newUser);
+    return isCreate;
+  } 
 }
