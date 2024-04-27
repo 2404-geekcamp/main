@@ -14,7 +14,8 @@ module.exports = class JoinModel {
     const { data, error } = await this.#db.connect()
       .from('joins')
       .insert({ chat_id, user_id })
-      .select('id');
+      .select('id')
+      .single();
     if (error) {
       console.error(error);
       return null;
