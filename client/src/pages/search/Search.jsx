@@ -31,50 +31,44 @@ const Search = () => {
 
   return (
     <>
-      <form action="#" method="post">
+      <form action="/search/result">
         <div className="skills">
-          {
-            skills.map((skill) => {
-              return (
-                <label key={skill.id}>
-                  <input type="checkbox" name="skills" value={skill.id} />
-                  {skill.name}
-                </label>
-              )
-            })
-          }
+          {skills.map((skill) => {
+            return (
+              <label key={skill.id}>
+                <input type="checkbox" name="skills" value={skill.id} />
+                {skill.name}
+              </label>
+            );
+          })}
         </div>
 
         <div className="experience">
-          {
-            experiences.map((experience) => {
-              return (
-                <label key={experience.id}>
-                  <input type="radio" name="experiences" value={experience.id} />
-                  {experience.name}
-                </label>
-              )
-            })
-          }
+          {experiences.map((experience) => {
+            return (
+              <label key={experience.id}>
+                <input type="radio" name="experiences" value={experience.id} />
+                {experience.name}
+              </label>
+            );
+          })}
         </div>
 
         <div className="stance">
-          {
-            stances.map((stance) => {
-              return (
-                <label key={stance.id}>
-                  <input type="radio" name="stances" value={stance.id} />
-                  {stance.name}
-                </label>
-              )
-            })
-          }
+          {stances.map((stance) => {
+            return (
+              <label key={stance.id}>
+                <input type="radio" name="stances" value={stance.id} />
+                {stance.name}
+              </label>
+            );
+          })}
         </div>
 
         <button type="submit">Search</button>
       </form>
     </>
-  )
+  );
 }
 
 export default Search;
