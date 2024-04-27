@@ -2,7 +2,7 @@ import React from 'react'
 
 const InitProfile = () => {
   return (
-    <div className='mx-auto max-w-[900px] h-screen pt-32 mx-10'>
+    <div className='mx-auto max-w-[900px] h-screen pt-32 mx-10 px-10'>
       <h1 className='text-center text-3xl font-bold my-10'>プロフィール設定</h1>
       <div className='mx-auto'>
         <h2 className='text-xl font-bold mt-10'>技術</h2>
