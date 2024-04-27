@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
+import { Header } from '../components/Header'
 
 const home = () => {
   let [message, setMessage] = React.useState('')
