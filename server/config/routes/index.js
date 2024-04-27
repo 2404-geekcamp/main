@@ -15,6 +15,12 @@ module.exports = function (db) {
     res.json(users);
   })
 
+  router.get('/user/:id', async function(req, res, next) {
+    const userController = new UserController(db);
+    const user = await userController.fetchById(req.params.id);
+    res.json(user);
+  })
+
   router.get("/user_skills/:user_id", async function (req, res, next) {
     const userSkillController = new UserSkillController(db);
     const user_id = req.params.user_id;
