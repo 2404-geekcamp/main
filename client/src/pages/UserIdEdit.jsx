@@ -10,9 +10,12 @@ const userIdEdit = () => {
   const [userName, setUserName] = useState("Big Gyoza")
   const [userProfile,setUserProfile] = useState('でたい') 
   return (
-    <div className='mx-auto max-w-[900px] p-8 mx-8 my-8'>
+    <div className='mx-auto max-w-[900px] p-8 my-8'>
       {/* <h1>{ id }</h1> */}
-      <img src={icon} alt="" style={{ width: '80px',height:"80px"}}/>
+      <div className='flex justify-between'>
+        <img src={icon} alt="" style={{ width: '80px',height:"80px"}}/>
+        <button className='mr-20 bg-indigo-700 h-14 px-8 rounded-xl text-white font-bold'>更新する</button>
+      </div>
       <div className="h-[500px] w-full">
         <form action="" className="">
           <label htmlFor="username" className="block">名前</label>
