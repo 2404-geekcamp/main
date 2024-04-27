@@ -3,17 +3,17 @@ import React, { useEffect } from 'react'
 
 const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 
-const UserSkillBadge = (userSkill) => {
-  let skill = "";
+const UserSkillBadge = ({ skill }) => {
+  const [skillName, setSkillName] = React.useState("");
   useEffect(() => {
-    axios.get(apiUrl + "/skill/" + userSkill.skill_id).then((res) => {
-      skill = res.data.name;
+    axios.get(apiUrl + "/skill/" + skill.id).then((res) => {
+      setSkillName(res.data.name);
     })
-  }, [userSkill.skill_id]);
+  }, []);
 
   return (
-    <p key={userSkill.id} className="bg-slate-200 rounded-xl p-1 mr-4 mb-4">
-      {skill.name}
+    <p key={skill.id} className="bg-slate-200 rounded-xl p-1 mx-2">
+      {skillName}
     </p>
   );
 }
