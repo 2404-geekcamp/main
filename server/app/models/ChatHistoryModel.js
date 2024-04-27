@@ -15,13 +15,14 @@ module.exports = class ChatHistoryModel {
     const { data, error } = await this.#db.connect()
       .from('chat_histories')
       .insert({ chat_id: chatId, sender_id: senderId, content: content })
+      .select("id")
       .single();
     if (error) {
       console.error(error);
       return null;
     }
 
-    return data.id;
+    return data?.id;
   }
 
   /**
