@@ -102,5 +102,12 @@ module.exports = function (db) {
     res.json(result);
   });
 
+  // stance_option
+  router.get("/stance_options", async function (req, res, next) {
+    const stanceOptionController = new StanceOptionController(db);
+    const result = await stanceOptionController.fetch();
+    res.json(result);
+  });
+
   return router;
 }
