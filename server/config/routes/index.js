@@ -1,12 +1,15 @@
-let express = require('express');
-let UserController = require('../../app/controllers/UserController');
-let router = express.Router();
-let UserSkillController = require('../../app/controllers/UserSkillController');
-let ChatController = require('../../app/controllers/ChatController');
-let ChatHistoryController = require('../../app/controllers/ChatHistoryController');
+const express = require('express');
+const UserController = require('../../app/controllers/UserController');
+const router = express.Router();
+const UserSkillController = require('../../app/controllers/UserSkillController');
+const ChatController = require('../../app/controllers/ChatController');
+const ChatHistoryController = require('../../app/controllers/ChatHistoryController');
 const InviteMessageController = require('../../app/controllers/InviteMessageController');
 const JoinController = require('../../app/controllers/JoinController');
-let ChatListController = require('../../app/controllers/ChatListController');
+const ChatListController = require('../../app/controllers/ChatListController');
+const SkillController = require('../../app/controllers/SkillController');
+const ExperienceOptionController = require('../../app/controllers/ExperienceOptionController');
+const StanceOptionController = require('../../app/controllers/StanceOptionController');
 
 
 module.exports = function (db) {
@@ -36,7 +39,7 @@ module.exports = function (db) {
     const result = await chatListController.fetch(user_id);
     res.json(result);
   });
-  
+
   router.post("/chat/create", async function (req, res, next) {
     const chatController = new ChatController(db);
     const result = await chatController.create();
@@ -85,6 +88,33 @@ module.exports = function (db) {
     const result = await inviteMessageController.fetchReceived(req.params.user_id, true);
     res.json(result);
   })
+
+  // skill
+  router.get("/skills", async function (req, res, next) {
+    const skillController = new SkillController(db);
+    const result = await skillController.fetchAll();
+    res.json(result);
+  });
+
+  router.get("/skill/:id", async function (req, res, next) {
+    const skillController = new SkillController(db);
+    const result = await skillController.fetchById(req.params.id);
+    res.json(result);
+  });
+
+  // experience_option
+  router.get("/experience_options", async function (req, res, next) {
+    const experienceOptionController = new ExperienceOptionController(db);
+    const result = await experienceOptionController.fetch();
+    res.json(result);
+  });
+
+  // stance_option
+  router.get("/stance_options", async function (req, res, next) {
+    const stanceOptionController = new StanceOptionController(db);
+    const result = await stanceOptionController.fetch();
+    res.json(result);
+  });
 
   return router;
 }
