@@ -13,8 +13,10 @@ module.exports = function (db) {
 
   router.patch('/user_update/:user_id', async function(req, res, next) {
     const userController = new UserController(db);
-    const isUpdate = await userController.update(req);
-    res.json(isUpdate);
+    const isUserUpdate = await userController.update(req);
+    const userSkillController = new UserSkillController(db);
+    const isUserSkilllUpdate = await userSkillController.update(req);
+    res.json({isUserUpdate: isUserUpdate, isUserSkilllUpdate: isUserSkilllUpdate});
   });
 
   router.get("/user_skills/:user_id", async function (req, res, next) {

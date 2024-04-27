@@ -90,7 +90,7 @@ module.exports = class UserController {
       'experience_option_id': req.body.experience_option_id,
       'stance_option_id':     req.body.stance_option_id
     }
-    const isUpdate = await userModel.update(updateUser, req.body.skill_ids, req.params.user_id);
-    return isUpdate ? true : false;
+    const isUpdate = await userModel.update(updateUser, req.params.user_id);
+    return isUpdate;
   }
 }
