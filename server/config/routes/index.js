@@ -9,6 +9,7 @@ const JoinController = require('../../app/controllers/JoinController');
 const ChatListController = require('../../app/controllers/ChatListController');
 const SkillController = require('../../app/controllers/SkillController');
 const ExperienceOptionController = require('../../app/controllers/ExperienceOptionController');
+const StanceOptionController = require('../../app/controllers/StanceOptionController');
 
 
 module.exports = function (db) {
