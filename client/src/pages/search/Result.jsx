@@ -1,6 +1,12 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom';
 
 const Result = () => {
+  const params = new URLSearchParams(useLocation().search);
+  const skills = params.getAll('skills');
+  const experience = params.get('experience');
+  const stance = params.get('stance');
+
   return (
     <div className='max-w-[900px] mx-auto'>
       <h2 className="text-center text-3xl font-bold py-10">検索結果</h2>
