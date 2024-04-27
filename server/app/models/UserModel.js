@@ -1,3 +1,5 @@
+var bcrypt = require('bcrypt');
+
 module.exports = class UserModel {
     #db = null;
 
@@ -7,21 +9,13 @@ module.exports = class UserModel {
 
     /**
     *  ユーザーを新しく DB へと保存する。
-    *  @params name string ユーザー名
-    *  @params email string ユーザーが入力したメールアドレス
-    *  @params password_hash string ユーザーが入力したパスワードをハッシュ化したもの
+    *  @params Object
     *  @returns bool DBへの挿入が成功したか否かをbool値で返す。trueの場合は成功、falseの場合は失敗
     */
-    async insert(name, email, password_hash, experience_option_id, stance_option_id) {
+    async insert(user) {
         const { error } = await this.#db.connect()
             .from('users')
-            .insert({
-                'name':                 name,
-                'email':                email,
-                'password_hash':        password_hash,
-                'experience_option_id': experience_option_id,
-                'stance_option_id':     stance_option_id
-            });
+            .insert(user);
 
         return error ? false : true;
     }
@@ -43,19 +37,20 @@ module.exports = class UserModel {
     /**
      ユーザーデータが存在するか検索する。
     @params email string
-    @params password_hash string
+    @params password string
     @return boolean 存在するか
     */
-    async isExist(email, password_hash) {
+    async isExist(email, password) {
         const { data, error } = await this.#db.connect()
             .from('users')
             .select()
-            .match({
-                email:         email,
-                password_hash: password_hash
-            });
+            .eq('email', email);
+        
+        if(data.length === 0) return false;
 
-        return data.length ? true : false
+        if(!bcrypt.compareSync(password, data[0].password_hash)) return false;
+
+        return true
     }
 
     /**
