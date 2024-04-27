@@ -5,6 +5,26 @@ module.exports = class ChatHistoryModel {
   }
 
   /**
+   * チャット履歴を作成する
+   * @param {number} chatId
+   * @param {number} userId
+   * @param {string} content
+   * @return {number} 作成したチャット履歴のid
+   */
+  async insert(chatId, userId, content) {
+    const { data, error } = await this.#db.connect()
+      .from('chat_histories')
+      .insert({ chat_id: chatId, user_id: userId, content: content })
+      .single();
+    if (error) {
+      console.error(error);
+      return null;
+    }
+
+    return data.id;
+  }
+
+  /**
    * チャットidを受け取り、そのチャットの履歴を返す
    * @param {number} chatId
    * @return Object[] チャット履歴
