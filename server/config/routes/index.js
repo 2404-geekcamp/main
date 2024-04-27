@@ -19,14 +19,6 @@ module.exports = function (db) {
     res.json(users);
   });
 
-  router.patch('/user_update/:user_id', async function(req, res, next) {
-    const userController = new UserController(db);
-    const isUserUpdate = await userController.update(req);
-    const userSkillController = new UserSkillController(db);
-    const isUserSkilllUpdate = await userSkillController.update(req);
-    res.json({isUserUpdate: isUserUpdate, isUserSkilllUpdate: isUserSkilllUpdate});
-  });
-
   router.post('/signup', async function(req, res, next) {
     const userController = new UserController(db);
     const isCreateUser = await userController.signup(req);
@@ -34,6 +26,22 @@ module.exports = function (db) {
     res.json({
       success: isCreateUser && isLogin
     });
+  });
+
+  router.post('/login', async function(req, res, next) {
+    const userController = new UserController(db);
+    const isLogin = await userController.login(req);
+    res.json({
+      success: isLogin
+    });
+  })
+
+  router.patch('/user_update/:user_id', async function(req, res, next) {
+    const userController = new UserController(db);
+    const isUserUpdate = await userController.update(req);
+    const userSkillController = new UserSkillController(db);
+    const isUserSkilllUpdate = await userSkillController.update(req);
+    res.json({isUserUpdate: isUserUpdate, isUserSkilllUpdate: isUserSkilllUpdate});
   });
 
   //user
