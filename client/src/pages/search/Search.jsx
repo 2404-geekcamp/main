@@ -47,7 +47,7 @@ const Search = () => {
           {experiences.map((experience) => {
             return (
               <label key={experience.id}>
-                <input type="radio" name="experiences" value={experience.id} />
+                <input type="radio" name="experience" value={experience.id} />
                 {experience.name}
               </label>
             );
@@ -58,7 +58,7 @@ const Search = () => {
           {stances.map((stance) => {
             return (
               <label key={stance.id}>
-                <input type="radio" name="stances" value={stance.id} />
+                <input type="radio" name="stance" value={stance.id} />
                 {stance.name}
               </label>
             );
