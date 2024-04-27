@@ -48,7 +48,7 @@ module.exports = class UserModel {
         
         if(data.length === 0) return false;
 
-        if(!bcrypt.compareSync(data[0].password_hash, password)) return false;
+        if(!bcrypt.compareSync(password, data[0].password_hash)) return false;
 
         return true
     }

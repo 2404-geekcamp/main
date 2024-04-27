@@ -1,5 +1,5 @@
 curl -X POST \
-  http://localhost:3001/user/create \
+  http://localhost:3001/signup \
   -H 'Content-Type: application/json' \
   -d '{
     "username": "sample",

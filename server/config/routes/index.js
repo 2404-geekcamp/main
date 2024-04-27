@@ -19,18 +19,21 @@ module.exports = function (db) {
     res.json(users);
   })
 
+  router.post('/signup', async function(req, res, next) {
+    const userController = new UserController(db);
+    const isCreateUser = await userController.signup(req);
+    const isLogin = await userController.login(req);
+    res.json({
+      success: isCreateUser && isLogin
+    });
+  });
+
   //user
   router.get('/user/:id', async function(req, res, next) {
     const userController = new UserController(db);
     const user = await userController.fetchById(req.params.id);
     res.json(user);
   })
-
-  router.post('/user/create', async function(req, res, next) {
-    const userController = new UserController(db);
-    const isCreateUser = await userController.signup(req);
-    res.json({isCreateUser: isCreateUser});
-  });
 
   router.get("/user_skills/:user_id", async function (req, res, next) {
     const userSkillController = new UserSkillController(db);
