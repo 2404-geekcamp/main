@@ -1,12 +1,17 @@
 import React from "react";
+import icon from "../../samples/icon.png";
+import { Link } from "react-router-dom";
 
 //DM一覧のパーツ
 const ChatPreview = () => {
   return (
-    <div className="flex items-center gap-6 py-6 px-6 border-b">
+    <Link
+      to={"1"} //idを入れる
+      className="flex items-center gap-6 py-6 px-6 border-b hover:bg-gray-50"
+    >
       {/* アイコン */}
-      <div className="w-14 h-14 rounded-full bg-gray-200">
-        <img src="" alt="" />
+      <div className="w-14 h-14 rounded-full">
+        <img src={icon} alt="" />
       </div>
       <div>
         <div className="flex items-center gap-6">
@@ -15,7 +20,7 @@ const ChatPreview = () => {
         </div>
         <span>message content</span>
       </div>
-    </div>
+    </Link>
   );
 };
 
