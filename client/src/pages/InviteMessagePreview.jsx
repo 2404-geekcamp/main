@@ -19,6 +19,8 @@ const customStyles = {
   },
 };
 
+Modal.setAppElement("#root");
+
 const InviteMessagePreview = () => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -61,7 +63,9 @@ const InviteMessagePreview = () => {
             <button className="py-2 w-36 border border-gray-900">
               ことわる
             </button>
-            <button className="py-2 w-36 bg-gray-700 text-white">出る</button>
+            <button className="py-2 w-36 bg-gray-700 text-white">
+              話してみる
+            </button>
           </div>
         </div>
       </Modal>
