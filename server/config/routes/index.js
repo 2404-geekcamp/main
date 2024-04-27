@@ -6,6 +6,7 @@ let ChatController = require('../../app/controllers/ChatController');
 let ChatHistoryController = require('../../app/controllers/ChatHistoryController');
 const InviteMessageController = require('../../app/controllers/InviteMessageController');
 const JoinController = require('../../app/controllers/JoinController');
+let ChatListController = require('../../app/controllers/ChatListController');
 
 
 module.exports = function (db) {
@@ -29,6 +30,13 @@ module.exports = function (db) {
   });
 
   // chat
+  router.get("/chat", async function (req, res, next) {
+    const user_id = req.header('user_id');
+    const chatListController = new ChatListController(db);
+    const result = await chatListController.fetch(user_id);
+    res.json(result);
+  });
+  
   router.post("/chat/create", async function (req, res, next) {
     const chatController = new ChatController(db);
     const result = await chatController.create();
