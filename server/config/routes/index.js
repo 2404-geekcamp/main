@@ -29,7 +29,7 @@ module.exports = function (db) {
   });
 
   // join
-  router.post("/chat/:chat_id/user/:user_id/join", async function (req, res, next) {
+  router.post("/chat/:chat_id/user/:user_id/joins/create", async function (req, res, next) {
     const joinController = new JoinController(db);
     const result = await joinController.join(req.params.chat_id, req.params.user_id);
     res.json(result);
