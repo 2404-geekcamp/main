@@ -1,5 +1,5 @@
 import React from "react";
-import icon from "../../samples/icon.png";
+import icon from "../samples/icon.png";
 import { Link } from "react-router-dom";
 
 //DM一覧のパーツ
