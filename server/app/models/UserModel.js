@@ -57,4 +57,18 @@ module.exports = class UserModel {
 
         return data.length ? true : false
     }
+
+    /**
+     * ユーザー情報を取得する
+     * @params id
+     * @return user
+     */
+    async fetchOfId(id) {
+        const { data, error } = await this.#db.connect()
+            .from('users')
+            .select()
+            .eq('id', id);
+        
+        return data;
+    }
 }
