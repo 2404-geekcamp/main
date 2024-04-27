@@ -19,7 +19,11 @@ const Result = () => {
   return (
     <div className='max-w-[900px] mx-auto'>
       <h2 className="text-center text-3xl font-bold py-10">検索結果</h2>
-      <UserPreviewCard />
+      {
+        users.map((user) => (
+          <UserPreviewCard key={user.id} user={user} />
+        ))
+      }
     </div>
   )
 }
