@@ -9,6 +9,7 @@ const JoinController = require('../../app/controllers/JoinController');
 const ChatListController = require('../../app/controllers/ChatListController');
 const SkillController = require('../../app/controllers/SkillController');
 const ExperienceOptionController = require('../../app/controllers/ExperienceOptionController');
+const StanceOptionController = require('../../app/controllers/StanceOptionController');
 
 
 module.exports = function (db) {
@@ -99,6 +100,13 @@ module.exports = function (db) {
   router.get("/experience_options", async function (req, res, next) {
     const experienceOptionController = new ExperienceOptionController(db);
     const result = await experienceOptionController.fetch();
+    res.json(result);
+  });
+
+  // stance_option
+  router.get("/stance_options", async function (req, res, next) {
+    const stanceOptionController = new StanceOptionController(db);
+    const result = await stanceOptionController.fetch();
     res.json(result);
   });
 
