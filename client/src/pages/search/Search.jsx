@@ -9,10 +9,25 @@ const Search = () => {
   useEffect(() => {
     axios.get(apiUrl + "/skills")
       .then((res) => {
-        setSkills(res.data);
+        setSkills(res.data.data);
       })
   }, []);
-  console.log(skills)
+
+  const [experiences, setExperiences] = useState([]);
+  useEffect(() => {
+    axios.get(apiUrl + "/experience_options")
+      .then((res) => {
+        setExperiences(res.data);
+      })
+  }, []);
+
+  const [stances, setStances] = useState([]);
+  useEffect(() => {
+    axios.get(apiUrl + "/stance_options")
+      .then((res) => {
+        setStances(res.data);
+      })
+  }, []);
 
   return (
     <>
@@ -21,14 +36,42 @@ const Search = () => {
           {
             skills.map((skill) => {
               return (
-                <div key={skill.id} className="skill">
-                  <input type="checkbox" name="skill" value={skill.id} id={skill.id} />
-                  <label htmlFor={skill.id}>{skill.name}</label>
-                </div>
+                <label key={skill.id}>
+                  <input type="checkbox" name="skills" value={skill.id} />
+                  {skill.name}
+                </label>
               )
             })
           }
         </div>
+
+        <div className="experience">
+          {
+            experiences.map((experience) => {
+              return (
+                <label key={experience.id}>
+                  <input type="radio" name="experiences" value={experience.id} />
+                  {experience.name}
+                </label>
+              )
+            })
+          }
+        </div>
+
+        <div className="stance">
+          {
+            stances.map((stance) => {
+              return (
+                <label key={stance.id}>
+                  <input type="radio" name="stances" value={stance.id} />
+                  {stance.name}
+                </label>
+              )
+            })
+          }
+        </div>
+
+        <button type="submit">Search</button>
       </form>
     </>
   )
