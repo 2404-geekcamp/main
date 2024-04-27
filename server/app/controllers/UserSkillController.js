@@ -16,4 +16,16 @@ module.exports = class UserSkillController {
     const skills = await model.fetch(user_id);
     return skills;
   }
+
+  /**
+   * ユーザーからの入力を受け取り、そのユーザーのスキル情報を更新する。
+   * @params req HttpRequest
+   * @return bool
+   */
+  async update(req) {
+    const model = new UserSkillModel(this.#db);
+    const isUpdate = await model.update(req.body.skill_ids, req.params.user_id);
+
+    return isUpdate;
+  }
 }

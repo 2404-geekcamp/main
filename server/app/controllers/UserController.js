@@ -67,6 +67,7 @@ module.exports = class UserController {
   /**
   ユーザーの入力を受け取り、ログインを試行する。
   @params req HttpRequest
+  @return bool ログインできたかどうか
 */
   async login(req) {
     const userModel = new UserModel(this.#db);
@@ -79,7 +80,22 @@ module.exports = class UserController {
   }
 
   /**
-   * 対象とするユーザーの情報を返す
+   * ユーザーの入力を受け取り、ユーザー情報を更新する
+   * @params req HttpRequest
+   * @return bool 更新できたかどうか
+   */
+  async update(req) {
+    const userModel = new UserModel(this.#db);
+    let updateUser = {
+      'name':                 req.body.name,
+      'experience_option_id': req.body.experience_option_id,
+      'stance_option_id':     req.body.stance_option_id
+    }
+    const isUpdate = await userModel.update(updateUser, req.params.user_id);
+    return isUpdate;
+  }
+  
+   /** 対象とするユーザーの情報を返す
    * @params id
    * @return Object
    */

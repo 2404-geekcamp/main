@@ -1,0 +1,7 @@
+curl -X PATCH \
+  http://localhost:3001/user_update/9  \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "name_update",
+    "skill_ids": [1, 2, 3]
+  }'
