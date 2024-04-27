@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json" -d '{"sender_id": 1, "content":"test"}' http://localhost:3001/chat/5/histories/create
