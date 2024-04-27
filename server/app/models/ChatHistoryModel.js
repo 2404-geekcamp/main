@@ -7,14 +7,14 @@ module.exports = class ChatHistoryModel {
   /**
    * チャット履歴を作成する
    * @param {number} chatId
-   * @param {number} userId
+   * @param {number} senderId
    * @param {string} content
    * @return {number} 作成したチャット履歴のid
    */
-  async insert(chatId, userId, content) {
+  async insert(chatId, senderId, content) {
     const { data, error } = await this.#db.connect()
       .from('chat_histories')
-      .insert({ chat_id: chatId, user_id: userId, content: content })
+      .insert({ chat_id: chatId, sender_id: senderId, content: content })
       .single();
     if (error) {
       console.error(error);

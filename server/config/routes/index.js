@@ -36,13 +36,13 @@ module.exports = function (db) {
       res.status(400).json({ error: "content is required" });
       return;
     }
-    const result = await chatHistoryController.insert(req.params.chat_id, req.body.user_id, req.body.content);
+    const result = await chatHistoryController.insert(req.params.chat_id, req.body.sender_id, req.body.content);
     res.json(result);
   });
 
   router.get("/chat/:chat_id/histories", async function (req, res, next) {
-    const chatGHistoryController = new ChatHistoryController(db);
-    const result = await chatGHistoryController.fetchByChatId(req.params.chat_id);
+    const chatHistoryController = new ChatHistoryController(db);
+    const result = await chatHistoryController.fetchByChatId(req.params.chat_id);
     res.json(result);
   });
 

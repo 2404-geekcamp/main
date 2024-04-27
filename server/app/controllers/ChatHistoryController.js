@@ -9,13 +9,13 @@ module.exports = class ChatHistoryController {
   /**
    * チャット履歴を作成する
    * @param {number} chatId
-   * @param {number} userId
+   * @param {number} senderId
    * @param {string} content
    * @return {number} 作成したチャット履歴のid
    */
-  async insert(chatId, userId, content) {
+  async insert(chatId, senderId, content) {
     const model = new ChatHistoryModel(this.#db);
-    return await model.insert(chatId, userId, content);
+    return await model.insert(chatId, senderId, content);
   }
 
   /**
