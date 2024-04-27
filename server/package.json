@@ -9,6 +9,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.42.5",
     "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
     "concurrently": "^8.2.2",
     "cookie-parser": "~1.4.6",
     "cors": "^2.8.5",

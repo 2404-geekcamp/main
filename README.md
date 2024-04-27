@@ -105,6 +105,7 @@ CREATE TABLE invite_messages (
     sender_id INT,
     receiver_id INT,
     content VARCHAR(255),
+    is_checked BOOLEAN DEFAULT false,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW(),
     FOREIGN KEY (sender_id) REFERENCES users(id),
