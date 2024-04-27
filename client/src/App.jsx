@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import InitProfile from './pages/auth/InitProfile'
-import Button from './Button'
+import Button from './components/Button'
 
 
 function App() {

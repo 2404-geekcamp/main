@@ -1,5 +1,5 @@
 import React from "react";
-import InviteMessagePreview from "./InviteMessagePreview";
+import InviteMessagePreview from "../components/InviteMessagePreview";
 
 const InviteMessages = () => {
   return (
