@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import UserPreviewCard from '../../components/search/UserPreviewCard';
@@ -12,9 +12,13 @@ const Result = () => {
   const experience = params.get('experience');
   const stance = params.get('stance');
 
-  axios.post(apiUrl + "/search", { skill_ids, experience, stance }).then((res) => {
-    setUsers(res.data);
-  })
+  useEffect(() => {
+    axios
+      .post(apiUrl + "/search", { skill_ids, experience, stance })
+      .then((res) => {
+        setUsers(res.data);
+      });
+  }, []);
 
   return (
     <div className='max-w-[900px] mx-auto'>

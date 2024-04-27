@@ -10,7 +10,7 @@ const UserPreviewCard = ({ user }) => {
     axios.get(apiUrl + "/user_skills/" + user.id).then((res) => {
       setSkills(res.data);
     });
-  }, [user.id]);
+  }, []);
 
   return (
     <div className="mx-10 px-10 border-2 rounded-lg border-black mb-2">
