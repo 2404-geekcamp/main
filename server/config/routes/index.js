@@ -3,6 +3,7 @@ let UserController = require('../../app/controllers/UserController');
 let router = express.Router();
 let UserSkillController = require('../../app/controllers/UserSkillController');
 let ChatController = require('../../app/controllers/ChatController');
+let chatHistoryController = require('../../app/controllers/ChatHistoryController');
 const InviteMessageController = require('../../app/controllers/InviteMessageController');
 const JoinController = require('../../app/controllers/JoinController');
 
@@ -30,7 +31,7 @@ module.exports = function (db) {
 
   // chat history
   router.get("/chat/:chat_id/histories", async function (req, res, next) {
-    const chatGHistoryController = new chatGHistoryController(db);
+    const chatGHistoryController = new chatHistoryController(db);
     const result = await chatGHistoryController.fetchByChatId(req.params.chat_id);
     res.json(result);
   });
