@@ -21,8 +21,13 @@ module.exports = class UserController {
     const userModel = new UserModel(this.#db);
     const users = await userModel.fetchAll();
     const scoredUsers = [];
+
     for (const user of users) {
-      user.skill_ids = await userSkillController.fetch(user.id);
+      const skills = await userSkillController.fetch(user.id);
+      user.skill_ids = [];
+      skills.forEach(skills => {
+        user.skill_ids.push(skills.skill_id);
+      });
       user.score = this.getScore(user, skill_ids, experience_id, stance_id);
       scoredUsers.push({...user});
     }
