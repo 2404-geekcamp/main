@@ -22,6 +22,13 @@ const customStyles = {
   },
 };
 
+const formatDate = (date) => {
+  const d = new Date(date);
+  return `${d.getFullYear()}/${
+    d.getMonth() + 1
+  }/${d.getDate()} ${d.getHours()}:${d.getMinutes()}`;
+};
+
 Modal.setAppElement("#root");
 
 const InviteMessagePreview = ({inviteMessage}) => {
@@ -55,9 +62,9 @@ const InviteMessagePreview = ({inviteMessage}) => {
         <div className="text-start">
           <div className="flex items-center gap-6">
             <span className="font-bold text-lg">{sender.name}</span>
-            <span className="text-gray-500">4月21日</span>
+            <span className="text-gray-500">{formatDate(inviteMessage.created_at)}</span>
           </div>
-          <span>招待メッセージ</span>
+          <span>{inviteMessage.content}</span>
         </div>
       </button>
       <Modal
