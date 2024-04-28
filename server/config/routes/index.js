@@ -19,6 +19,14 @@ module.exports = function (db) {
     res.json(users);
   });
 
+  router.post('/create_profile', async function(req, res, next) {
+    const userController = new UserController(db);
+    const userSkillController = new UserSkillController(db);
+    const isCreateUserProfile = await userController.createProfile(req);
+    const isCreateUserSkill = await userSkillController.update(req);
+    res.json({success: isCreateUserProfile && isCreateUserSkill});
+  });
+
   router.post('/signup', async function(req, res, next) {
     const userController = new UserController(db);
     const isCreateUser = await userController.signup(req);

@@ -96,6 +96,21 @@ module.exports = class UserController {
     const isUpdate = await userModel.update(updateUser, req.params.user_id);
     return isUpdate;
   }
+
+  /**
+   * ユーザーの入力を受け取り、初期プロフィール情報を登録する
+   * @params req HttpRequest
+   * @return bool 作成できたかどうか
+   */
+  async createProfile(req) {
+    const userModel = new UserModel(this.#db);
+    let createProfileUser = {
+      'experience_option_id': req.body.experience_option_id,
+      'stance_option_id':     req.body.stance_option_id
+    }
+    const isCreate = await userModel.update(createProfileUser, req.session.login_user.id);
+    return isCreate;
+  }
   
    /** 対象とするユーザーの情報を返す
    * @params id
