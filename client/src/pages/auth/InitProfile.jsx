@@ -1,7 +1,8 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import CheckButton from "../../components/CheckButton.jsx";
+import SetButton from "../../components/auth/SetButton";
 
 const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 
