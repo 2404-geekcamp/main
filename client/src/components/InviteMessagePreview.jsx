@@ -74,15 +74,15 @@ const InviteMessagePreview = ({inviteMessage}) => {
       >
         <div className="flex flex-col gap-8 w-[600px]">
           <div className="flex flex-col gap-4">
-            <h2 className="font-bold text-xl">ユーザー名</h2>
-            <p>招待メッセージ</p>
+            <h2 className="font-bold text-xl">{sender.name}</h2>
+            <p>{inviteMessage.content}</p>
           </div>
           <div className="flex justify-around">
-            <button className="py-2 w-36 border border-gray-900">
-              ことわる
-            </button>
             <button className="py-2 w-36 bg-gray-700 text-white">
               話してみる
+            </button>
+            <button className="py-2 w-36 border border-gray-900">
+              ことわる
             </button>
           </div>
         </div>
