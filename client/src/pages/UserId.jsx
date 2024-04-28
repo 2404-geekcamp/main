@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import icon from "../samples/icon.png";
 import Modal from "react-modal";
@@ -24,9 +25,13 @@ Modal.setAppElement("#root");
 
 const userId = () => {
   let { id } = useParams();
+  const [user, setUser] = useState({});
+  axios.get(`/user/${id}`).then((res) => {
+    setUser(res.data);
+  });
+
   const [currentUser, setCurrentUser] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
-
   function openModal() {
     setIsOpen(true);
   }
@@ -40,7 +45,7 @@ const userId = () => {
       <div className="flex justify-between">
         <div className="flex">
           <img src={icon} alt="icon sample" style={{ width: "80px" }} />
-          <h2 className="text-2xl font-bold ml-4">BIG GYOZA</h2>
+          <h2 className="text-2xl font-bold ml-4">{user.name}</h2>
         </div>
         {currentUser ? (
           <Link to={"edit"} className="px-4 py-2 h-fit rounded-md bg-gray-50">
