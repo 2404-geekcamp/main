@@ -60,7 +60,7 @@ const userId = () => {
 
   return (
     <>
-    <Header backPath={"/home"} back={"<"} forWardPath={"/user/id/edit"} forward={"プロフィール編集"} />
+    <Header backPath={"/home"} back={"<"} forWardPath={`/user/${id}/edit`} forward={"プロフィール編集"} />
     <div className='mx-auto max-w-[900px] p-8 bg-slate-300 mx-8 my-8 rounded-md'>
 
       {/* <h1>{ id }</h1> */}
