@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Header } from '../components/Header'
+import logo from '../samples/tacos.png'
 
 const home = () => {
   let [message, setMessage] = React.useState('')
@@ -24,7 +25,7 @@ const home = () => {
 
   return (
     <>
-    <Header backPath={""} back={""} forWardPath={"/user/:id"} forward={"マイページ"}/>
+    <Header backPath={""} back={<img src={logo} className='w-20'/>} forWardPath={"/user/:id"} forward={"マイページ"}/>
     <div className='max-w-[900px] mx-auto mt-20'>
       <Link to="/search" className='bg-indigo-700 block w-[300px] mx-auto h-[100px] rounded-xl font-bold text-xl text-white mb-40 flex justify-center items-center'>
          一緒にハッカソンに出る仲間を探す
