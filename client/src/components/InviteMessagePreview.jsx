@@ -1,6 +1,9 @@
 import React from "react";
 import Modal from "react-modal";
 import icon from "../samples/icon.png";
+import axios from "axios";
+
+const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 
 const customStyles = {
   overlay: {
@@ -21,7 +24,15 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const InviteMessagePreview = () => {
+const InviteMessagePreview = ({inviteMessage}) => {
+  const { sender_id, content } = inviteMessage;
+  const [sender, setSender] = React.useState({});
+  React.useEffect(() => {
+    axios.get(`${apiUrl}/user/${sender_id}`).then((res) => {
+      setSender(res.data);
+    });
+  }, []);
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -43,7 +54,7 @@ const InviteMessagePreview = () => {
         </div>
         <div className="text-start">
           <div className="flex items-center gap-6">
-            <span className="font-bold text-lg">ユーザー名</span>
+            <span className="font-bold text-lg">{sender.name}</span>
             <span className="text-gray-500">4月21日</span>
           </div>
           <span>招待メッセージ</span>
