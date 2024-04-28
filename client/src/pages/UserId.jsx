@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import icon from "../samples/icon.png";
 import Modal from "react-modal";
+import UserSkillBadges from "../components/search/UserSkillBadges";
 
 const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 
@@ -38,7 +39,13 @@ const userId = () => {
         console.log(err);
       });
   }, []);
-  console.log(user)
+
+  const [skills, setSkills] = useState([]);
+  useEffect(() => {
+    axios.get(`${apiUrl}/user_skills/${id}`).then((res) => {
+      setSkills(res.data);
+    });
+  }, []);
 
   const [currentUser, setCurrentUser] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -72,20 +79,11 @@ const userId = () => {
       </div>
       <div>
         <p className="text-xl font-bold mt-10">技術</p>
-        <div className="flex max-w-full flex-wrap w-4/5	">
-          <p className="mx-2 my-2 bg-white p-1 rounded-lg">Sample</p>
-          <p className="mx-2 my-2 bg-white p-1 rounded-lg">Sample</p>
-          <p className="mx-2 my-2 bg-white p-1 rounded-lg">Sample</p>
-          <p className="mx-2 my-2 bg-white p-1 rounded-lg">Sample</p>
-          <p className="mx-2 my-2 bg-white p-1 rounded-lg">Sample</p>
-          <p className="mx-2 my-2 bg-white p-1 rounded-lg">Sample</p>
-          <p className="mx-2 my-2 bg-white p-1 rounded-lg">Sample</p>
-        </div>
+        <UserSkillBadges skills={skills} />
         <div className="">
           <p className="text-xl font-bold mt-10">自己紹介</p>
           <p className="mx-2 my-2 bg-white p-1 rounded-lg">
-            ここに自己紹介テキストが来ます
-            サンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキスト
+            ここに自己紹介テキストがきます
           </p>
         </div>
       </div>
