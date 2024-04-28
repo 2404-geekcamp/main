@@ -73,7 +73,7 @@ const userId = () => {
             onClick={openModal}
             className="px-4 py-2 h-fit rounded-md bg-gray-50"
           >
-            招待メッセージ送る
+            招待メッセージを送る
           </button>
         )}
       </div>
