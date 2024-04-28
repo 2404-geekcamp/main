@@ -1,7 +1,10 @@
+
+import icon from '../samples/icon.png'
+import { Header } from '../components/Header';
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import icon from "../samples/icon.png";
 import Modal from "react-modal";
+
 
 const customStyles = {
   overlay: {
@@ -35,7 +38,10 @@ const userId = () => {
   }
 
   return (
-    <div className="mx-auto max-w-[900px] p-8 bg-slate-300 my-8 rounded-md">
+    <>
+    <Header backPath={"/home"} back={"<"} forWardPath={"/user/id/edit"} forward={"プロフィール編集"} />
+    <div className='mx-auto max-w-[900px] p-8 bg-slate-300 mx-8 my-8 rounded-md'>
+
       {/* <h1>{ id }</h1> */}
       <div className="flex justify-between">
         <div className="flex">
@@ -127,7 +133,11 @@ const userId = () => {
         </div>
       </Modal>
     </div>
-  );
-};
+
+    </>
+
+  )
+}
+
 
 export default userId;

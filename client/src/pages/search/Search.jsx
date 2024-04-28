@@ -1,7 +1,10 @@
-import axios from "axios";
-import React from "react";
-import { useEffect, useState } from "react";
+
+import axios from 'axios';
+import React from 'react'
+import { useEffect, useState } from 'react'
+import {Header} from '../../components/Header'
 import CheckButton from "../../components/CheckButton.jsx";
+
 
 const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 
@@ -29,6 +32,7 @@ const Search = () => {
 
   return (
     <>
+      <Header backPath={"/home"} back={"<"} />
       <div className="max-w-[900px] mx-auto">
         <h1 className="text-3xl font-bold text-center my-10">検索</h1>
         <form action="/search/result" className="flex flex-col gap-8">
@@ -97,6 +101,7 @@ const Search = () => {
           </button>
         </form>
       </div>
+
     </>
   );
 };
