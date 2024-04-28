@@ -1,6 +1,9 @@
 import React from "react";
 import Modal from "react-modal";
 import icon from "../samples/icon.png";
+import axios from "axios";
+
+const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 
 const customStyles = {
   overlay: {
@@ -19,9 +22,24 @@ const customStyles = {
   },
 };
 
+const formatDate = (date) => {
+  const d = new Date(date);
+  return `${d.getFullYear()}/${
+    d.getMonth() + 1
+  }/${d.getDate()} ${d.getHours()}:${d.getMinutes()}`;
+};
+
 Modal.setAppElement("#root");
 
-const InviteMessagePreview = () => {
+const InviteMessagePreview = ({inviteMessage}) => {
+  const { sender_id, content } = inviteMessage;
+  const [sender, setSender] = React.useState({});
+  React.useEffect(() => {
+    axios.get(`${apiUrl}/user/${sender_id}`).then((res) => {
+      setSender(res.data);
+    });
+  }, []);
+
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -43,10 +61,10 @@ const InviteMessagePreview = () => {
         </div>
         <div className="text-start">
           <div className="flex items-center gap-6">
-            <span className="font-bold text-lg">ユーザー名</span>
-            <span className="text-gray-500">4月21日</span>
+            <span className="font-bold text-lg">{sender.name}</span>
+            <span className="text-gray-500">{formatDate(inviteMessage.created_at)}</span>
           </div>
-          <span>招待メッセージ</span>
+          <span>{inviteMessage.content}</span>
         </div>
       </button>
       <Modal
@@ -56,15 +74,15 @@ const InviteMessagePreview = () => {
       >
         <div className="flex flex-col gap-8 w-[600px]">
           <div className="flex flex-col gap-4">
-            <h2 className="font-bold text-xl">ユーザー名</h2>
-            <p>招待メッセージ</p>
+            <h2 className="font-bold text-xl">{sender.name}</h2>
+            <p>{inviteMessage.content}</p>
           </div>
           <div className="flex justify-around">
-            <button className="py-2 w-36 border border-gray-900">
-              ことわる
-            </button>
             <button className="py-2 w-36 bg-gray-700 text-white">
               話してみる
+            </button>
+            <button className="py-2 w-36 border border-gray-900">
+              ことわる
             </button>
           </div>
         </div>
