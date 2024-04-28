@@ -32,9 +32,9 @@ const Search = () => {
 
   return (
     <>
-      <Header backPath={"/home"} back={"<"} />
+      <Header backPath={"/home"} back={"<"} title={"検索"} />
       <div className="max-w-[900px] mx-auto">
-        <h1 className="text-3xl font-bold text-center my-10">検索</h1>
+        
         <form action="/search/result" className="flex flex-col gap-8">
           <div>
             <div className="mb-4 flex gap-4 items-end">

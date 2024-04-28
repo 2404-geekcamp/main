@@ -24,15 +24,17 @@ const Result = () => {
   }, []);
   if(users.length === 0){
     return(
+      <>
+      <Header backPath={"/search"} back={"<"} forWardPath={""} forward={""} title={"検索結果"} />
       <Loading />
+      </>
     )
   }
 
   return (
     <>
-    <Header backPath={"/search"} back={"<"} forWardPath={""} forward={""} />
+    <Header backPath={"/search"} back={"<"} forWardPath={""} forward={""} title={"検索結果"} />
     <div className='max-w-[900px] mx-auto'>
-      <h2 className="text-center text-3xl font-bold py-10">検索結果</h2>
       {users.map((user) => (
         <UserPreviewCard key={user.id} user={user} />
       ))}
