@@ -1,6 +1,7 @@
 const UserModel = require("../models/UserModel");
 const UserSkillController = require("./UserSkillController");
 var crypto = require('crypto');
+var bcrypt = require('bcrypt');
 
 module.exports = class UserController {
   #db = null;
@@ -66,19 +67,35 @@ module.exports = class UserController {
   /**
   ユーザーの入力を受け取り、ログインを試行する。
   @params req HttpRequest
+  @return bool ログインできたかどうか
 */
   async login(req) {
     const userModel = new UserModel(this.#db);
     const email = req.body.email;
-    const password_hash = req.body.password; //ハッシュ関数を適用する
-    const isUser = await userModel.isExist(email, password_hash);
+    const password = req.body.password;
+    const isUser = await userModel.isExist(email, password);
     if(!isUser) return false;
     req.session.loginKey = crypto.randomBytes(32).toString('hex');
     return true;
   }
 
   /**
-   * 対象とするユーザーの情報を返す
+   * ユーザーの入力を受け取り、ユーザー情報を更新する
+   * @params req HttpRequest
+   * @return bool 更新できたかどうか
+   */
+  async update(req) {
+    const userModel = new UserModel(this.#db);
+    let updateUser = {
+      'name':                 req.body.name,
+      'experience_option_id': req.body.experience_option_id,
+      'stance_option_id':     req.body.stance_option_id
+    }
+    const isUpdate = await userModel.update(updateUser, req.params.user_id);
+    return isUpdate;
+  }
+  
+   /** 対象とするユーザーの情報を返す
    * @params id
    * @return Object
    */
@@ -87,4 +104,20 @@ module.exports = class UserController {
     const user = await userModel.fetchOfId(id);
     return user;
   }
+
+  /**
+   * ユーザーからの入力に基づき新規登録する。
+   * @params req HttpRequest
+   * @return bool
+   */
+  async signup(req) {
+    const userModel = new UserModel(this.#db);
+    const newUser = {
+      'name':          req.body.username,
+      'email':         req.body.email,
+      'password_hash': bcrypt.hashSync(req.body.password, 10)
+    }
+    const isCreate = await userModel.insert(newUser);
+    return isCreate;
+  } 
 }
