@@ -12,7 +12,7 @@ const userIdEdit = () => {
   const [userProfile,setUserProfile] = useState('でたい') 
   return (
     <>
-    <Header backPath={"/user/:id"} back={"<"} forWardPath={""} forward={""} />
+    <Header backPath={`/user/${id}`} back={"<"} forWardPath={""} forward={""} />
     <div className='mx-auto max-w-[900px] p-8 my-8'>
       {/* <h1>{ id }</h1> */}
       <div className='flex justify-between'>
