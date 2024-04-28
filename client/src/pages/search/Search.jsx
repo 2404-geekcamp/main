@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { useEffect, useState } from 'react'
+import {Header} from '../../components/Header'
 
 const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 
@@ -31,6 +32,7 @@ const Search = () => {
 
   return (
     <>
+    <Header backPath={"/home"} back={"<"} />
       <form action="/search/result">
         <div className="skills">
           {skills.map((skill) => {

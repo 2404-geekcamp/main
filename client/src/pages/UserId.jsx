@@ -1,12 +1,16 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import icon from '../samples/icon.png'
+import { Header } from '../components/Header';
 
 
 
 const userId = () => {
   let { id } = useParams();
   return (
+
+    <>
+    <Header backPath={"/home"} back={"<"} forWardPath={"/user/id/edit"} forward={"プロフィール編集"} />
     <div className='mx-auto max-w-[900px] p-8 bg-slate-300	 mx-8 my-8 rounded-md'>
       {/* <h1>{ id }</h1> */}
       <div className='flex  '>
@@ -32,7 +36,7 @@ const userId = () => {
         </div>
       </div>
     </div>
-    
+    </>
 
   )
 }

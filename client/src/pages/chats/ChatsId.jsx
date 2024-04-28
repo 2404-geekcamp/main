@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import icon from "../../samples/icon.png";
+import { Header } from "../../components/Header";
 
 const ChatsId = () => {
   let { id } = useParams();
