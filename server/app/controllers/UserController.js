@@ -111,7 +111,7 @@ module.exports = class UserController {
       'experience_option_id': req.body.experience_option_id,
       'stance_option_id':     req.body.stance_option_id
     }
-    const isCreate = await userModel.update(createProfileUser, req.session.login_user.id);
+  const isCreate = await userModel.update(createProfileUser, 1 /*一旦ハードコーディングで*req.session.login_user.id*/);
     return isCreate;
   }
 
