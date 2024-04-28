@@ -14,8 +14,9 @@ const StanceOptionController = require('../../app/controllers/StanceOptionContro
 
 module.exports = function (db) {
   router.post('/search', async function (req, res, next) {
+    console.log(req.body);
     const userController = new UserController(db);
-    const users = await userController.search(req.body.skill_ids, req.body.experience_id, req.body.stance_id);
+    const users = await userController.search(req.body.skill_ids, req.body.experience, req.body.stance);
     res.json(users);
   });
 
