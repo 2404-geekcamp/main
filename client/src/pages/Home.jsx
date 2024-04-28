@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { Header } from '../components/Header'
 
 const home = () => {
   let [message, setMessage] = React.useState('')
@@ -22,10 +23,12 @@ const home = () => {
   }, [])
 
   return (
-    <div className='max-w-[900px] mx-auto'>
-      <button className='bg-indigo-700 block w-[300px] mx-auto h-[100px] rounded-xl font-bold text-xl text-white mb-40'>
-        一緒にハッカソンに出る仲間を探す
-      </button>
+    <>
+    <Header backPath={""} back={""} forWardPath={"/user/:id"} forward={"マイページ"}/>
+    <div className='max-w-[900px] mx-auto mt-20'>
+      <Link to="/search" className='bg-indigo-700 block w-[300px] mx-auto h-[100px] rounded-xl font-bold text-xl text-white mb-40 flex justify-center items-center'>
+         一緒にハッカソンに出る仲間を探す
+      </Link>
       <div className='mx-auto px-10'>
         
         <Link to="/chats" className='bg-indigo-700 block text-white h-[70px] rounded-xl font-bold text-xl w-full justify-center flex items-center my-10'>DM一覧</Link>
@@ -33,7 +36,8 @@ const home = () => {
         
       </div>
     </div>
-    // <h1>{ message }</h1>
+    {/* <h1>{ message }</h1> */}
+    </>
   )
 }
 
