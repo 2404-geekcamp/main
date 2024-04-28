@@ -1,0 +1,8 @@
+curl -X POST \
+  http://localhost:3001/create_profile  \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "experience_option_id": 1,
+    "stance_option_id": 1,
+    "skill_ids": [1, 2, 3]
+  }'

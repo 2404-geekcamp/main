@@ -15,8 +15,16 @@ const StanceOptionController = require('../../app/controllers/StanceOptionContro
 module.exports = function (db) {
   router.post('/search', async function (req, res, next) {
     const userController = new UserController(db);
-    const users = await userController.search(req.body.skill_ids, req.body.experience_id, req.body.stance_id);
+    const users = await userController.search(req.body.skill_ids, req.body.experience, req.body.stance);
     res.json(users);
+  });
+
+  router.post('/create_profile', async function(req, res, next) {
+    const userController = new UserController(db);
+    const userSkillController = new UserSkillController(db);
+    const isCreateUserProfile = await userController.createProfile(req);
+    const isCreateUserSkill = await userSkillController.update(req);
+    res.json({success: isCreateUserProfile && isCreateUserSkill});
   });
 
   router.post('/signup', async function(req, res, next) {

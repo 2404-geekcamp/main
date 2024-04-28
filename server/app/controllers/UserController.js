@@ -21,12 +21,15 @@ module.exports = class UserController {
     const userModel = new UserModel(this.#db);
     const users = await userModel.fetchAll();
     const scoredUsers = [];
+
     for (const user of users) {
-      user.skill_ids = await userSkillController.fetch(user.id);
-      scoredUsers.push({
-        ...user,
-        score: this.getScore(user, skill_ids, experience_id, stance_id)
+      const skills = await userSkillController.fetch(user.id);
+      user.skill_ids = [];
+      skills.forEach(skills => {
+        user.skill_ids.push(skills.skill_id);
       });
+      user.score = this.getScore(user, skill_ids, experience_id, stance_id);
+      scoredUsers.push({...user});
     }
     scoredUsers.sort((a, b) => b.score - a.score);
     return scoredUsers;
@@ -75,7 +78,9 @@ module.exports = class UserController {
     const password = req.body.password;
     const isUser = await userModel.isExist(email, password);
     if(!isUser) return false;
-    req.session.loginKey = crypto.randomBytes(32).toString('hex');
+    const loginUser = await userModel.fetchOfLoginUser(email, password);
+    req.session.login_key = crypto.randomBytes(32).toString('hex');
+    req.session.login_user = loginUser;
     return true;
   }
 
@@ -94,7 +99,22 @@ module.exports = class UserController {
     const isUpdate = await userModel.update(updateUser, req.params.user_id);
     return isUpdate;
   }
-  
+
+  /**
+   * ユーザーの入力を受け取り、初期プロフィール情報を登録する
+   * @params req HttpRequest
+   * @return bool 作成できたかどうか
+   */
+  async createProfile(req) {
+    const userModel = new UserModel(this.#db);
+    let createProfileUser = {
+      'experience_option_id': req.body.experience_option_id,
+      'stance_option_id':     req.body.stance_option_id
+    }
+    const isCreate = await userModel.update(createProfileUser, req.session.login_user.id);
+    return isCreate;
+  }
+
    /** 対象とするユーザーの情報を返す
    * @params id
    * @return Object
@@ -119,5 +139,5 @@ module.exports = class UserController {
     }
     const isCreate = await userModel.insert(newUser);
     return isCreate;
-  } 
+  }
 }

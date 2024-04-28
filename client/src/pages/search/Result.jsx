@@ -9,11 +9,12 @@ const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 const Result = () => {
   const [users, setUsers] = React.useState([]);
   const params = new URLSearchParams(useLocation().search);
-  const skill_ids = params.getAll('skills').map((skill) => skill.id);
-  const experience = params.get('experience');
-  const stance = params.get('stance');
+  const skill_ids = params.getAll('skills').map(Number);
+  const experience = Number(params.get('experience'));
+  const stance = Number(params.get('stance'));
 
   useEffect(() => {
+    console.log(skill_ids, experience, stance);
     axios
       .post(apiUrl + "/search", { skill_ids, experience, stance })
       .then((res) => {
