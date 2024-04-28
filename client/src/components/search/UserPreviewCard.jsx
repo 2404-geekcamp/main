@@ -19,7 +19,7 @@ const UserPreviewCard = ({ user }) => {
         <h3 className="font-bold text-xl">
           <Link to={`/user/${user.id}`}>{user.name}</Link>
         </h3>
-        <p className="text-white bg-indigo-700 px-4 py-2 rounded-xl ">2 matches</p>
+        <p className="text-white bg-indigo-700 px-4 py-2 rounded-xl ">{user.score} %</p>
       </div>
       <UserSkillBadges skills={skills} />
     </div>
