@@ -20,6 +20,8 @@ const InitProfile = () => {
     });
   }, []);
 
+  const navigate = useNavigate();
+
   const [stances, setStances] = useState([]);
   useEffect(() => {
     axios.get(apiUrl + "/stance_options").then((res) => {
@@ -27,74 +29,90 @@ const InitProfile = () => {
     });
   }, []);
 
+  const [userHasSkills, setUserHasSkills] = useState([]);
+  const [userHasExperiences, setUserHasExperiences] = useState();
+  const [userHasStances, setUserHasStances] = useState();
+
+  const handleChangeSkills = (value) => {
+    const newSkills = [...userHasSkills, value];
+    setUserHasSkills(newSkills);
+  };
+
+  const handleChangeExperiences = (value) => {
+    setUserHasExperiences(value);
+  };
+
+  const handleChangeStances = (value) => {
+    setUserHasStances(value);
+  };
+
+  const createProfile = () => {
+    const createProfile = {
+      skill_ids: userHasSkills,
+      experience_option_id: userHasExperiences,
+      stance_option_id: userHasStances,
+    };
+    axios.post(apiUrl + "/create_profile", createProfile).then((res) => {
+      if (!res.data.success) return;
+      navigate("/home");
+    });
+  };
+
   return (
     <div className="mx-auto max-w-[900px] h-screen pt-32  px-8">
       <h1 className="text-center text-3xl font-bold my-10">プロフィール設定</h1>
-      <form action="" className="flex flex-col gap-8">
-        <div>
-          <div className="mb-4 flex gap-4 items-end">
-            <h2 className="text-2xl">技術</h2>
-            <span className="text-gray-500">複数選択可</span>
-          </div>
-          <div className="flex flex-wrap gap-x-2 gap-y-2">
-            {skills.map((skill) => {
-              return (
-                <CheckButton
-                  key={skill.id}
-                  type="checkbox"
-                  inputName="skills"
-                  value={skill.id}
-                  Name={skill.name}
-                ></CheckButton>
-              );
-            })}
-          </div>
+      <div className="mx-auto">
+        <h2 className="text-xl font-bold mt-10">技術</h2>
+        <div className="mt-4 flex flex-wrap">
+          {skills.map((skill) => {
+            return (
+              <SetButton
+                key={skill.id}
+                onClick={handleChangeSkills}
+                text={skill.name}
+                id={skill.id}
+              />
+            );
+          })}
         </div>
-        <div>
-          <div className="mb-4 flex gap-4 items-end">
-            <h2 className="text-2xl">経験</h2>
-            <span className="text-gray-500">単一選択</span>
-          </div>
-          <div className="flex flex-wrap gap-x-2 gap-y-2">
-            {experiences.map((experience) => {
-              return (
-                <CheckButton
-                  key={experience.id}
-                  type="radio"
-                  inputName="experience"
-                  value={experience.id}
-                  Name={experience.name}
-                ></CheckButton>
-              );
-            })}
-          </div>
+      </div>
+
+      <div>
+        <h2 className="text-xl font-bold mt-10">ハッカソン出場経験</h2>
+        <div className="mt-4 flex flex-wrap">
+          {experiences.map((experience) => {
+            return (
+              <SetButton
+                key={experience.id}
+                onClick={handleChangeExperiences}
+                text={experience.name}
+                id={experience.id}
+              />
+            );
+          })}
         </div>
-        <div>
-          <div className="mb-4 flex gap-4 items-end">
-            <h2 className="text-2xl">スタンス</h2>
-            <span className="text-gray-500">単一選択</span>
-          </div>
-          <div className="flex flex-wrap gap-x-2 gap-y-2">
-            {stances.map((stance) => {
-              return (
-                <CheckButton
-                  key={stance.id}
-                  type="radio"
-                  inputName="stance"
-                  value={stance.id}
-                  Name={stance.name}
-                ></CheckButton>
-              );
-            })}
-          </div>
+      </div>
+      <div>
+        <h2 className="text-xl font-bold mt-10">ハッカソンへのスタンス</h2>
+        <div className="mt-4 flex flex-wrap">
+          {stances.map((stance) => {
+            return (
+              <SetButton
+                key={stance.id}
+                onClick={handleChangeStances}
+                text={stance.name}
+                id={stance.id}
+              />
+            );
+          })}
         </div>
-        <button
-          type="submit"
-          className="py-2 px-6 mt-8 rounded-full border border-gray-700 hover:bg-gray-50"
-        >
-          設定
-        </button>
-      </form>
+      </div>
+      <button
+        onClick={createProfile}
+        className="w-[200px] bg-black text-white mx-auto h-[40px]"
+      >
+        登録
+      </button>
     </div>
   );
 };
