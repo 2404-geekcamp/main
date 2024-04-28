@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import icon from '../samples/icon.png'
 import { useState } from 'react'
 import Button from '../components/Button'
+import { Header } from '../components/Header'
 
 const userIdEdit = () => {
   let { id } = useParams();
@@ -10,6 +11,8 @@ const userIdEdit = () => {
   const [userName, setUserName] = useState("Big Gyoza")
   const [userProfile,setUserProfile] = useState('でたい') 
   return (
+    <>
+    <Header backPath={"/user/:id"} back={"<"} forWardPath={""} forward={""} />
     <div className='mx-auto max-w-[900px] p-8 my-8'>
       {/* <h1>{ id }</h1> */}
       <div className='flex justify-between'>
@@ -51,6 +54,7 @@ const userIdEdit = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

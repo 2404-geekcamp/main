@@ -1,14 +1,19 @@
 import React from "react";
 import ChatPreview from "../../components/ChatsPreview";
+import { Header } from "../../components/Header";
 
 const Chats = () => {
   return (
+    <>
+    <Header backPath={"/home"} back={"<"} />
     <div className="max-w-[900px] mx-auto">
+      
       <h1 className="text-center text-3xl font-bold py-10">DM</h1>
       <div className="border-t">
         <ChatPreview />
       </div>
     </div>
+    </>
   );
 };
 
