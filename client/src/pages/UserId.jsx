@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import icon from "../samples/icon.png";
 import Modal from "react-modal";
+
+const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 
 const customStyles = {
   overlay: {
@@ -26,9 +28,17 @@ Modal.setAppElement("#root");
 const userId = () => {
   let { id } = useParams();
   const [user, setUser] = useState({});
-  axios.get(`/user/${id}`).then((res) => {
-    setUser(res.data);
-  });
+  useEffect(() => {
+    axios
+      .get(`${apiUrl}/user/${id}`)
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  console.log(user)
 
   const [currentUser, setCurrentUser] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
