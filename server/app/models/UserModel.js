@@ -69,6 +69,25 @@ module.exports = class UserModel {
     }
 
     /**
+     ユーザーの入力からユーザー情報を取得する。
+    @params email string
+    @params password string
+    @return Object
+    */
+    async fetchOfLoginUser(email, password) {
+        const { data, error } = await this.#db.connect()
+            .from('users')
+            .select()
+            .eq('email', email);
+        
+        if(data.length === 0) return {};
+
+        if(!bcrypt.compareSync(password, data[0].password_hash)) return {};
+
+        return data[0]; 
+    }
+
+    /**
      * ユーザー情報を取得する
      * @params id
      * @return user

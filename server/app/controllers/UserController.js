@@ -75,7 +75,9 @@ module.exports = class UserController {
     const password = req.body.password;
     const isUser = await userModel.isExist(email, password);
     if(!isUser) return false;
-    req.session.loginKey = crypto.randomBytes(32).toString('hex');
+    const loginUser = await userModel.fetchOfLoginUser(email, password);
+    req.session.login_key = crypto.randomBytes(32).toString('hex');
+    req.session.login_user = loginUser;
     return true;
   }
 
