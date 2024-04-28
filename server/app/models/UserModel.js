@@ -31,7 +31,7 @@ module.exports = class UserModel {
             .from('users')
             .update(user)
             .eq('id', id);
-        
+
         return error ? false : true;
     }
 
@@ -60,7 +60,7 @@ module.exports = class UserModel {
             .from('users')
             .select()
             .eq('email', email);
-        
+
         if(data.length === 0) return false;
 
         if(!bcrypt.compareSync(password, data[0].password_hash)) return false;
@@ -79,12 +79,12 @@ module.exports = class UserModel {
             .from('users')
             .select()
             .eq('email', email);
-        
+
         if(data.length === 0) return {};
 
         if(!bcrypt.compareSync(password, data[0].password_hash)) return {};
 
-        return data[0]; 
+        return data[0];
     }
 
     /**
@@ -96,8 +96,9 @@ module.exports = class UserModel {
         const { data, error } = await this.#db.connect()
             .from('users')
             .select()
-            .eq('id', id);
-        
+            .eq('id', id)
+            .single();
+
         return data;
     }
 }
