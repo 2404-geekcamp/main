@@ -21,12 +21,15 @@ module.exports = class UserController {
     const userModel = new UserModel(this.#db);
     const users = await userModel.fetchAll();
     const scoredUsers = [];
+
     for (const user of users) {
-      user.skill_ids = await userSkillController.fetch(user.id);
-      scoredUsers.push({
-        ...user,
-        score: this.getScore(user, skill_ids, experience_id, stance_id)
+      const skills = await userSkillController.fetch(user.id);
+      user.skill_ids = [];
+      skills.forEach(skills => {
+        user.skill_ids.push(skills.skill_id);
       });
+      user.score = this.getScore(user, skill_ids, experience_id, stance_id);
+      scoredUsers.push({...user});
     }
     scoredUsers.sort((a, b) => b.score - a.score);
     return scoredUsers;
@@ -111,7 +114,7 @@ module.exports = class UserController {
     const isCreate = await userModel.update(createProfileUser, req.session.login_user.id);
     return isCreate;
   }
-  
+
    /** 対象とするユーザーの情報を返す
    * @params id
    * @return Object
@@ -136,5 +139,5 @@ module.exports = class UserController {
     }
     const isCreate = await userModel.insert(newUser);
     return isCreate;
-  } 
+  }
 }
