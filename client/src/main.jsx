@@ -26,7 +26,7 @@ import InviteMessages from './pages/InviteMessages.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
   },
 
   // auth
