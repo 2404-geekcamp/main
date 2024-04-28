@@ -24,7 +24,7 @@ module.exports = class UserSkillController {
    */
   async update(req) {
     const model = new UserSkillModel(this.#db);
-    const isUpdate = await model.update(req.body.skill_ids, req.session.login_user.id);
+    const isUpdate = await model.update(req.body.skill_ids, 1/*一旦ハードコーディングで*req.session.login_user.id*/);
 
     return isUpdate;
   }

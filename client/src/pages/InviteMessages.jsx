@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import InviteMessagePreview from "../components/InviteMessagePreview";
 import axios from "axios";
+import { Header } from "../components/Header";
 
 const apiUrl = import.meta.env.VITE_API_SERVER_URL;
 
@@ -14,8 +15,9 @@ const InviteMessages = () => {
   }, []);
 
   return (
+    <>
+    <Header backPath={"/home"} back={"<"} title={"招待メッセージ一覧"} />
     <div className="max-w-[900px] mx-auto">
-      <h1 className="text-center text-3xl font-bold py-10">招待メッセージ</h1>
       <div className="border-t">
         {inviteMessages.map((inviteMessage) => (
           <InviteMessagePreview
@@ -25,6 +27,7 @@ const InviteMessages = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 
