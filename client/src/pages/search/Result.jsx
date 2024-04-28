@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import UserPreviewCard from '../../components/search/UserPreviewCard';
+import Loading from '../../components/Loading';
 import {Header} from '../../components/Header';
 
 const apiUrl = import.meta.env.VITE_API_SERVER_URL;
@@ -21,18 +22,20 @@ const Result = () => {
         setUsers(res.data);
       });
   }, []);
+  if(users.length === 0){
+    return(
+      <Loading />
+    )
+  }
 
   return (
     <>
     <Header backPath={"/search"} back={"<"} forWardPath={""} forward={""} />
     <div className='max-w-[900px] mx-auto'>
-      
       <h2 className="text-center text-3xl font-bold py-10">検索結果</h2>
-      {
-        users.map((user) => (
-          <UserPreviewCard key={user.id} user={user} />
-        ))
-      }
+      {users.map((user) => (
+        <UserPreviewCard key={user.id} user={user} />
+      ))}
     </div>
     </>
   )
